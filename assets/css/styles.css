@@ -50,6 +50,14 @@ body {
     text-decoration: none !important;
 }
 
+.sidebar-small {
+    display: none;
+}
+
+.menu-btn{
+    display: none;
+}
+
 .left-padded {
     padding-left: 2vw !important;
 }
@@ -86,6 +94,17 @@ body {
     text-align: justify;
 }
 
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: rgba(216, 191, 216, 0.5);
+}
+
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+    background-color: white;
+}
+
+
                 /* Dashboard page */
 .dash-content {
     display: grid;
@@ -118,9 +137,29 @@ nav {
     border-bottom: 1px solid #cdcdcd;
 }
 
+.ribbon {
+    align-items: center;
+    display: flex;
+    vertical-align: center;
+    width: fit-content;
+}
+
+.navbar-brand {
+    display: none;
+    font-size: 25px;
+}
+
 .navbar-img {
     padding-right: 2vw !important;
     width: 5vw;
+}
+
+.menu-btn {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    outline: none !important;
+    width: 50px;
 }
 
 
@@ -185,5 +224,38 @@ nav {
 
     .navbar-brand {
         display: initial;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #grid-container {
+        grid-template-columns: auto;
+        grid-gap: 0;
+    }
+
+    .menu-btn{
+        display: block;
+    }
+
+    .sidebar-small {
+        width: 50vw;
+        z-index: 1;
+    }
+
+    .sidebar-small-show {
+        height: 100vh;
+        left: 0;
+    }
+
+    .sidebar-small-hide {
+        left: -50vw !important;
+    }
+
+    .sidebar-small .heading {
+        font-size: 25px;
+    }
+
+    .side-button {
+        width: 50vw;
     }
 }
