@@ -259,3 +259,43 @@ nav {
         width: 50vw;
     }
 }
+
+.topNav{
+    border:0px;
+}
+
+#start{
+    font-style: italic;
+}
+.searchBar{
+    margin-left: 5%;
+    width: 75%;
+    background-color:rgba(230, 220, 220, 0.76)
+
+   
+}
+.form-inline{
+
+  border:solid 1px ;
+  background-color:rgba(230, 220, 220, 0.76)
+
+}
+
+#search{
+    border: 0px;
+    
+    background-color:rgba(230, 220, 220, 0.76)
+}
+
+#searchIcon{
+    border:none;
+    
+    background-color:rgba(230, 220, 220, 0.76);
+    color:black;
+    
+    
+  }
+  #searchIcon:hover{
+    background-color:black;
+    color: white;
+  }
