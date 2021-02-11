@@ -1,3 +1,14 @@
+// Get UI elements
+const tableBody = document.querySelector('tbody');
+// tableBody.children[0].children[0]    to access first td in the row / to access transaction id
+const addForm = document.querySelector('#addForm');
+const btn = document.querySelector('#add')
+
+// Any method to get the dept of current user
+// --Use URL or as a single page app
+const currentDept = document.querySelector('#dept');
+
+
 let db;
 
 onload = function (){
@@ -13,13 +24,13 @@ onload = function (){
         console.log('ClearanceDB opened.');
         db = request.result;
         // Insert loan transaction data into UI
-        displayTransactions();
+        // displayTransactions();
     }
 
     request.onupgradeneeded = (e) => {
         let db = e.target.result;
         
-        ////// Library Table
+        ////// Library Dept Table
         let libraryOS = db.createObjectStore('libraryOS', { keyPath: 'id', autoIncrement:true });
         
         // creating columns
@@ -45,7 +56,7 @@ onload = function (){
         sportsOS.createIndex('dateLoaned', 'dateLoaned', { unique : false });
         
 
-        ////// Dormitory Table 
+        ////// Dormitory Dept Table 
         let dormOS = db.createObjectStore('dormOS', { keyPath: 'id', autoIncrement:true });
         
         // creating columns
@@ -55,7 +66,32 @@ onload = function (){
         dormOS.createIndex('phone', 'phone', { unique : false });
         dormOS.createIndex('department', 'department', { unique : false });
         dormOS.createIndex('dormNo', 'dormNo', { unique : false });
+        dormOS.createIndex('dormCondition', 'dormCondition', { unique : false })
         dormOS.createIndex('dateLoaned', 'dateLoaned', { unique : false });
+        
+
+        ////// Department Table 
+        let deptOS = db.createObjectStore('deptOS', { keyPath: 'id', autoIncrement:true });
+        
+        // creating columns
+        deptOS.createIndex('firstName', 'firstName', { unique : false });
+        deptOS.createIndex('lastName', 'lastName', { unique : false });
+        deptOS.createIndex('studentId', 'studentId', { unique : true });
+        deptOS.createIndex('phone', 'phone', { unique : false });
+        deptOS.createIndex('semesterStatus', 'semesterStatus', { unique : false });
+        
+
+        ////// Staff Table 
+        let staffOS = db.createObjectStore('staffOS', { keyPath: 'id', autoIncrement:true });
+        
+        // creating columns
+        staffOS.createIndex('firstName', 'firstName', { unique : false });
+        staffOS.createIndex('lastName', 'lastName', { unique : false });
+        staffOS.createIndex('staffId', 'staffId', { unique : true });
+        // --encrypt password
+        staffOS.createIndex('password', 'password', { unique : false });
+        staffOS.createIndex('phone', 'phone', { unique : false });
+        staffOS.createIndex('semesterStatus', 'semesterStatus', { unique : false });
         
         
         console.log('ClearanceDB upgraded.');
@@ -63,7 +99,79 @@ onload = function (){
     //////////////////////////////////////////
 
 
-    // form.addEven
+    // addForm.addEventListener('submit', addTransaction);
+    btn.addEventListener('click', addTransaction);
+    function addTransaction(e){
+        e.preventDefault();
+
+        // get new record from ui and put into object
+        // this obj literal will differ for d/f depts
+        let newRecord = {
+            'firstName' : 'Abebe',
+            'lastName' : 'Kebede',
+            'phone' : 0911445566,
+            'department' : 'Mechanical',
+            'bookTitle' : 'Stress: Calculating on Moving Objects By K.J. Brown',
+            'dateLoaned' : new Date('2/11/2021').getTime()
+        };
+
+        // get deptId from url / other method
+        let dept = 01;
 
 
+        // create transaction and get object store based on what dept is requesting access
+        let transaction;
+        let objectStore;
+        // find out which table to store record on
+        switch (dept) {
+            // library
+            case 01:
+                transaction = db.transaction(['libraryOS'], 'readwrite');
+                objectStore = transaction.objectStore('libraryOS');
+                break;
+
+            // sports
+            case 02:
+                transaction = db.transaction(['sportsOS'], 'readwrite');
+                objectStore = transaction.objectStore('sportsOS');
+                break;
+
+            // dorm
+            case 03:
+                transaction = db.transaction(['dormOS'], 'readwrite');
+                objectStore = transaction.objectStore('dormOS');
+                break;
+
+             // dept
+             case 04:
+                transaction = db.transaction(['deptOS'], 'readwrite');
+                objectStore = transaction.objectStore('deptOS');
+                break;
+
+            default:
+                console.log('Wrong department value found!');
+                break;
+        }
+
+        // add record to correct OS
+        let request = objectStore.add(newRecord);
+        request.onsuccess = () => {
+            // clear form / close modal
+            
+        }
+        
+        transaction.oncomplete = () => {
+            console.log('Succesfully added new record.');
+            // display data
+            // displayTransactions();
+        }
+
+        transaction.onerror = () => {
+            console.log('Error! Cannot add new record!');
+        }
+
+    }
+
+
+    
 }
