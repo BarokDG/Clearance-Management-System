@@ -90,16 +90,46 @@ i {
 
 /* Dashboard page */
 .dash-content {
-    display: grid;
-    grid-gap: 2em;
-    grid-template-columns: repeat(3, 1fr);
+
+}
+/* Charts inside dash content */
+#chart {
+    background-color: white;
+    max-width: 650px;
+    margin: 35px auto;
+}
+
+.pieChart {
+    background-color: white;
+    display: inline-block;
+    margin-left: 5%;
+    max-width: 350px;
 }
 
 /* Loan Page */
 /* Search bar inside the main container */
+/* Search bar */
+.search-bar {
+    text-align: center;
+}
 
+.search-bar input {
+    border: none;
+    font-size: 1.2rem;
+    margin-bottom: 2%;
+    outline: none;
+    padding: 1%;
+    padding-left: 2%;
+    width: 50%;
+}
 
+#gradient-button {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
 
+#gradient-button:hover {
+    background: linear-gradient(to left, #8e2de2, #4a00e0);
+}
 
 /* Navbar */
 nav {
@@ -130,7 +160,6 @@ nav {
     outline: none !important;
     width: 50px;
 }
-
 
 /* Responsiveness */
 @media screen and (max-width: 1000px) {
@@ -223,20 +252,4 @@ nav {
     nav {
         display: block !important;
     }
-}
-
-
-/* Search bar */
-.search-bar {
-    text-align: center;
-}
-
-input {
-    border: none;
-    font-size: 1.2rem;
-    margin-bottom: 2%;    
-    outline: none;
-    padding: 1%;
-    padding-left: 2%;
-    width: 50%;
 }

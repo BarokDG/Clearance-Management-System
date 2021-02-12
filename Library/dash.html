@@ -53,7 +53,8 @@
 
             <h3 class="heading my-5">AAIT Clearance System</h3>
 
-            <a href="./dash.html"><button class="side-button active"><i class="fas fa-tachometer-slowest fa-2x"></i>Dashboard</button></a>
+            <a href="./dash.html"><button class="side-button active"><i
+                        class="fas fa-tachometer-slowest fa-2x"></i>Dashboard</button></a>
             <a href="./loan.html"><button class="side-button"><i class="fas fa-books fa-2x"></i>Loan</button></a>
             <a href=""><button class="side-button"><i class="fas fa-info-circle fa-2x"></i>How To Use</button></a>
             <a href=""><button class="side-button"><i class="fas fa-bell fa-2x"></i>Announcements</button></a>
@@ -79,8 +80,11 @@
                 </div>
             </nav>
 
-            <div class="main-content mt-3">
-
+            <div class="dash-content mt-3">
+                <div id="chart"></div>
+                <div id="pieChart" class="pieChart"></div>
+                <div id="pieChart2" class="pieChart"></div>
+                <div id="pieChart3" class="pieChart"></div>
             </div>
         </div>
     </div>
@@ -99,6 +103,41 @@
     <!-- for sidebar responsiveness -->
     <script src="../assets/js/sidebar.js"></script>
 
+    <!-- ApexCharts js -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        var options = {
+            chart: {
+                type: 'bar'
+            },
+            series: [{
+                name: 'sales',
+                data: [30, 40, 45, 50, 49, 60, 70, 91, 25]
+            }],
+            xaxis: {
+                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+            }
+        }
+
+        var optionsPie = {
+            chart: {
+                type: 'pie'
+            },
+            series: [44, 55, 13, 33],
+            labels: ['Apple', 'Mango', 'Orange', 'Watermelon']
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        var pieChart = new ApexCharts(document.querySelector("#pieChart"), optionsPie);
+        var pieChart2 = new ApexCharts(document.querySelector("#pieChart2"), optionsPie);
+        var pieChart3 = new ApexCharts(document.querySelector("#pieChart3"), optionsPie);
+
+        chart.render();
+        pieChart.render();
+        pieChart2.render();
+        pieChart3.render();
+        
+    </script>
 
 </body>
 
