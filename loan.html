@@ -11,10 +11,10 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 
     <!-- Favicon -->
-    <link rel="icon" href="./assets/images/svg files/favicon.svg">
+    <link rel="icon" href="../assets/images/svg files/favicon.svg">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -29,46 +29,43 @@
 <body>
     <div id="grid-container">
         <div class="sidebar">
-            <div class="hanging-nav">
-                <div class="svg-div">
-                    <svg style="margin: 0; padding: 0;" width='177' height='100' viewBox='0 0 177 100' fill='none'
-                        xmlns='http://www.w3.org/2000/svg'>
-                        <circle cx='72' cy='50' r='30' fill='#68DBFF' />
-                        <ellipse cx='104.647' cy='50' rx='29.7059' ry='30' fill='#FF7917' />
-                        <path fill-rule='evenodd' clip-rule='evenodd'
-                            d='M88.4039 75.1221C96.5911 69.7652 102 60.5143 102 50C102 39.4858 96.5911 30.2348 88.4039 24.878C80.2971 30.2348 74.9412 39.4858 74.9412 50C74.9412 60.5143 80.2971 69.7652 88.4039 75.1221Z'
-                            fill='#5D2C02' />
-                    </svg>
-                </div>
+            <div class="svg-div">
+                <svg style="margin: 0; padding: 0;" width='177' height='100' viewBox='0 0 177 100' fill='none'
+                    xmlns='http://www.w3.org/2000/svg'>
+                    <circle cx='72' cy='50' r='30' fill='#68DBFF' />
+                    <ellipse cx='104.647' cy='50' rx='29.7059' ry='30' fill='#FF7917' />
+                    <path fill-rule='evenodd' clip-rule='evenodd'
+                        d='M88.4039 75.1221C96.5911 69.7652 102 60.5143 102 50C102 39.4858 96.5911 30.2348 88.4039 24.878C80.2971 30.2348 74.9412 39.4858 74.9412 50C74.9412 60.5143 80.2971 69.7652 88.4039 75.1221Z'
+                        fill='#5D2C02' />
+                </svg>
 
-                <h3 class="left-padded heading my-5">AAIT Clearance System</h3>
-
-                <a href="./dash.html"><button class="rounded-pill"><i class="fas fa-tachometer-slowest"></i>
-                        Dashboard</button></a>
-                <a href="./loan.html"><button class="rounded-pill active"><i class="fas fa-books"></i> Loan</button></a>
-                <a href=""><button class="rounded-pill"><i class="fas fa-info-circle"></i> How To Use</button></a>
-                <a href=""><button class="rounded-pill"><i class="fas fa-cog"></i> Profile</button></a>
-                <a href=""><button class="rounded-pill"><i class="fas fa-sign-out-alt"></i> Log out</button></a>
+                <h3 class="heading">AAIT Clearance System</h3>
             </div>
+
+            <a href="./dash.html"><button><i class="fas fa-tachometer-slowest"></i>Dashboard</button></a>
+            <a href="./loan.html"><button class="active"><i class="fas fa-books"></i>Loan</button></a>
+            <a href=""><button><i class="fas fa-info-circle"></i>How To Use</button></a>
+            <a href=""><button><i class="fas fa-bell"></i>Announcements</button></a>
+            <a href=""><button><i class="fas fa-sign-out-alt"></i>Log out</button></a>
         </div>
 
         <div class="sidebar-small sidebar-small-hide">
 
             <h3 class="heading my-5">AAIT Clearance System</h3>
 
-            <a href="./dash.html"><button class="side-button"><i class="fas fa-tachometer-slowest fa-2x"></i>
-                    Dashboard</button></a>
-            <a href="./loan.html"><button class="side-button active"><i class="fas fa-books fa-2x"></i> Loan</button></a>
-            <a href=""><button class="side-button"><i class="fas fa-info-circle fa-2x"></i> How To Use</button></a>
-            <a href=""><button class="side-button"><i class="fas fa-cog fa-2x"></i> Profile</button></a>
-            <a href=""><button class="side-button"><i class="fas fa-sign-out-alt fa-2x"></i> Log out</button></a>
+            <a href="./dash.html"><button class="side-button"><i
+                        class="fas fa-tachometer-slowest fa-2x"></i>Dashboard</button></a>
+            <a href="./loan.html"><button class="side-button active"><i class="fas fa-books fa-2x"></i>Loan</button></a>
+            <a href=""><button class="side-button"><i class="fas fa-info-circle fa-2x"></i>How To Use</button></a>
+            <a href=""><button class="side-button"><i class="fas fa-bell fa-2x"></i>Announcements</button></a>
+            <a href=""><button class="side-button"><i class="fas fa-sign-out-alt fa-2x"></i>Log out</button></a>
 
         </div>
 
 
         <div class="main-container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light py-1 sticky-top">
-                <div class="ribbon left-padded">
+                <div class="ribbon">
                     <button class="menu-btn">
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
                             style="pointer-events: none; display: block; width: 100%; height: 100%;"
@@ -82,35 +79,22 @@
 
                     <a class="navbar-brand" href="#">Loan</a>
                 </div>
-
-                <img class="ml-auto navbar-img" src="./assets/images/Avatar_Penguin-512.webp" alt="">
             </nav>
 
             <div class="main-content mt-3">
 
-                <div class="topNav mb-2">
-                    <div class="leftside row">
-                        <div class="searchBar">
-                            <form class="form-inline rounded-pill mr-2">
-                                <button class="btn btn-outline-success my-sm-0 m-3" id="searchIcon" type="submit"> <i
-                                        class="fas fa-search"></i></button>
-                                <input class="form-control mr-sm-0" id="search" type="search"
-                                    placeholder="  Search Record" aria-label="Search">
-                            </form>
-                        </div>
-
-                        <button type="button" class="btn btn-info rounded-pill btn-lg mr-4 ml-5" data-toggle="modal"
-                            data-target="#exampleModal">
-                            <i class="fas fa-plus"></i> New Loan
-                        </button>
-
-                    </div>
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="search" id="search" placeholder="Search">
+                    <button type="button" class="btn btn-info" id="gradient-button" data-toggle="modal"
+                        data-target="#exampleModal">New Loan
+                    </button>
                 </div>
 
-                <table class="table table-hover table-striped">
-                    <thead>
+                <table class="table table-light table-hover">
+                    <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col"></th>
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">id</th>
@@ -258,7 +242,6 @@
                 </table>
             </div>
 
-            <button id="add">ADD</button>
         </div>
     </div>
 
@@ -273,22 +256,21 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="addForm">
                 <div class="modal-body mx-3">
+                    <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="First Name"
                                 required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Last Name"
                                 required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="studentId" placeholder="ID"
+                            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="ID"
                                 required>
                         </div>
                         <div class="form-group">
-
                             <label for="start" id="bd">Loan date:</label>
                             <input type="date" id="start" name="trip-start" value="2021-02-03" min="2018-01-01"
                                 max="2021-12-31" required>
@@ -299,12 +281,12 @@
                             <input type="date" id="start" name="trip-start" value="2021-02-03" min="2018-01-01"
                                 max="2021-12-31" required>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"> Loan</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"> Loan</button>
+                </div>
             </div>
         </div>
     </div>
@@ -321,10 +303,10 @@
     </script>
 
     <!-- for sidebar responsiveness -->
-    <script src="assets/js/sidebar.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
 
     <!-- for indexedDB -->
-    <script src="assets/js/db.js"></script>
+    <script src="../assets/js/db.js"></script>
 
 </body>
 
