@@ -1,5 +1,5 @@
 // Get UI elements
-const tableBody = document.querySelector('tbody');
+const tableBody = document.querySelector('.table-body');
 // tableBody.children[0].children[0]    to access first td in the row / to access transaction id
 const addForm = document.querySelector('#addForm');
 const btn = document.querySelector('#add')
@@ -24,7 +24,7 @@ onload = function (){
         console.log('ClearanceDB opened.');
         db = request.result;
         // Insert loan transaction data into UI
-        // displayTransactions();
+        displayTransactions();
     }
 
     request.onupgradeneeded = (e) => {
@@ -100,7 +100,7 @@ onload = function (){
 
 
     // addForm.addEventListener('submit', addTransaction);
-    btn.addEventListener('click', addTransaction);
+    // btn.addEventListener('click', addTransaction);
     function addTransaction(e){
         e.preventDefault();
 
@@ -109,6 +109,7 @@ onload = function (){
         let newRecord = {
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
+            'studentId' : 'ATR/1111/11',
             'phone' : 0911445566,
             'department' : 'Mechanical',
             'bookTitle' : 'Stress: Calculating on Moving Objects By K.J. Brown',
@@ -172,6 +173,96 @@ onload = function (){
 
     }
 
+    function displayTransactions(){
+        while (tableBody.firstChild){
+            tableBody.removeChild(tableBody.firstChild);
+        }
 
+        // create transaction and get object store based on what dept is requesting access
+        let transaction;
+        let objectStore;
+        let dept = 01;
+        // find out which table to store record on
+        switch (dept) {
+            // library
+            case 01:
+                transaction = db.transaction(['libraryOS'], 'readwrite');
+                objectStore = transaction.objectStore('libraryOS');
+                break;
+
+            // sports
+            case 02:
+                transaction = db.transaction(['sportsOS'], 'readwrite');
+                objectStore = transaction.objectStore('sportsOS');
+                break;
+
+            // dorm
+            case 03:
+                transaction = db.transaction(['dormOS'], 'readwrite');
+                objectStore = transaction.objectStore('dormOS');
+                break;
+
+             // dept
+             case 04:
+                transaction = db.transaction(['deptOS'], 'readwrite');
+                objectStore = transaction.objectStore('deptOS');
+                break;
+
+            default:
+                console.log('Wrong department value found!');
+                break;
+        }
+
+        objectStore.openCursor().onsuccess = (e) => {
+            let cursor = e.target.result;
+
+            if (cursor){
+                const tableRow = document.createElement('tr');
+                const idColumn = document.createElement('th');
+                const firstNameColumn = document.createElement('td');
+                const lastNameColumn = document.createElement('td');
+                const studentIdColumn = document.createElement('td');
+                const deptColumn = document.createElement('td');
+                const phoneColumn = document.createElement('td');
+                const bookLoanedColumn = document.createElement('td');
+                // const dateLoanedColumn = document.createElement('td');
+
+                tableRow.appendChild(idColumn);
+                tableRow.appendChild(firstNameColumn);
+                tableRow.appendChild(lastNameColumn);
+                tableRow.appendChild(studentIdColumn);
+                tableRow.appendChild(deptColumn);
+                tableRow.appendChild(phoneColumn);
+                tableRow.appendChild(bookLoanedColumn);
+                // tableRow.appendChild(dateLoanedColumn);
+                tableBody.appendChild(tableRow);
+
+                idColumn.textContent = cursor.value.id;
+                firstNameColumn.textContent = cursor.value.firstName;
+                lastNameColumn.textContent = cursor.value.lastName;
+                studentIdColumn.textContent = cursor.value.studentId;
+                deptColumn.textContent = cursor.value.dept;
+                phoneColumn.textContent = cursor.value.phone;
+                bookLoanedColumn.textContent = cursor.value.bookTitle;
+                // dateLoanedColumn.textContent = new Date(cursor.value.dateLoaned).toLocaleDateString('en-US');
+
+                cursor.continue();
+            }
+            else {
+                // Again, if list item is empty, display a 'No notes stored' message
+                if(!tableBody.firstChild) {
+                  const tableRow = document.createElement('tr');
+                  const tableData = document.createElement('td');
+                  
+                  tableData.textContent = 'No transactions recorded.';
+                  tableRow.appendChild(tableData);
+                  tableBody.appendChild(tableRow);
+                }
+                // if there are no more cursor items to iterate through, say so
+                console.log('Notes all displayed');
+              }
+        }
+
+    }
     
 }
