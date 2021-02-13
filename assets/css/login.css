@@ -1,8 +1,8 @@
-html{
-    background-color: antiquewhite;
-  }
-  body{
-    background-color: antiquewhite;
+body{
+    background-image: url('../images/background2.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .main-content{
       width: 50%;
@@ -11,12 +11,19 @@ html{
       margin: 5em auto;
       display: flex;
   }
+  h1{
+     padding-top: 20;
+     color: beige;
+    }
   h2{
-    color: black;
+    color: beige;
     font-family: 'Hammersmith One', sans-serif;
   }
+  .container-fluid{
+    padding-top: 10px;
+  }
   .company__info{
-      background-color: antiquewhite;
+    background-color: #32373D;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
       display: flex;
