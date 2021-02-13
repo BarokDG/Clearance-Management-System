@@ -1,6 +1,7 @@
 // Get UI elements
 const tableBody = document.querySelector('.table-body');
 const newLoanButton = document.querySelector('#gradient-button');
+const loginbtn = document.querySelector('.btn-login');
 var addForm;
 var addRecordButton;
 
@@ -279,4 +280,28 @@ onload = function (){
 
     }
     
+    loginbtn.addEventListener('click', login);
+
+    function login (e){
+
+        e.preventDefault()
+
+        let staffId = document.querySelector('#staffId').value;
+        let password = document.querySelector('#password').value;
+
+        let objectStore = transaction = db.transaction(["staffOS"]).objectStore("staffOS");
+        let request =  objectStore.get(staffId);
+        
+        request.onerror =  function(e){
+            alert("user not Authenticated")
+            return;
+        };
+         request.onsuccess = function(e){
+             if(password != request.result.password){
+                 alert("user not authenticated")
+                 return;    
+            }
+            console.log("You are Logged IN")
+        }      
+    }
 }
