@@ -1,9 +1,9 @@
 // Get UI elements
 const tableBody = document.querySelector('.table-body');
-// tableBody.children[0].children[0]    to access first td in the row / to access transaction id
-const newLoadButton = document.querySelector("#gradient-button")
+const newLoanButton = document.querySelector('#gradient-button');
 var addForm;
 var addRecordButton;
+
 // Any method to get the dept of current user
 // --Use URL or as a single page app
 const currentDept = document.querySelector('#dept');
@@ -98,7 +98,7 @@ onload = function (){
     }
     //////////////////////////////////////////
 
-    
+
     newLoanButton.addEventListener('click', getForm);
     // Get form after modal opens
     function getForm(){
@@ -108,21 +108,27 @@ onload = function (){
     }
 
     // addForm.addEventListener('submit', addTransaction);
-    // btn.addEventListener('click', addTransaction);
     function addTransaction(e){
         e.preventDefault();
 
         // get new record from ui and put into object
+        let newRecord = {};
+        for(let i = 0; i < addForm.childElementCount; i++){
+            newRecord[addForm.children[i].firstElementChild.id] = addForm.children[i].firstElementChild.value;
+        }
+        console.log(newRecord);
+        
         // this obj literal will differ for d/f depts
-        let newRecord = {
-            'firstName' : 'Abebe',
-            'lastName' : 'Kebede',
-            'studentId' : 'ATR/1111/11',
-            'phone' : 0911445566,
-            'department' : 'Mechanical',
-            'bookTitle' : 'Stress: Calculating on Moving Objects By K.J. Brown',
-            'dateLoaned' : new Date('2/11/2021').getTime()
-        };
+        // let newRecord = {
+        //     'firstName' : 'Abebe',
+        //     'lastName' : 'Kebede',
+        //     // studentId must be unique
+        //     'studentId' : 'ATR/1113/11',
+        //     'phone' : 0911445566,
+        //     'department' : 'Mechanical',
+        //     'bookTitle' : 'Stress: Calculating on Moving Objects By K.J. Brown',
+        //     'dateLoaned' : new Date('2/11/2021').getTime()
+        // };
 
         // get deptId from url / other method
         let dept = 01;
@@ -166,17 +172,17 @@ onload = function (){
         let request = objectStore.add(newRecord);
         request.onsuccess = () => {
             // clear form / close modal
-            
+            console.log('Add request successful.');
         }
         
         transaction.oncomplete = () => {
             console.log('Succesfully added new record.');
             // display data
-            // displayTransactions();
+            displayTransactions();
         }
 
         transaction.onerror = () => {
-            console.log('Error! Cannot add new record!');
+            console.log('Error! Cannot add new record!' + request.error);
         }
 
     }
@@ -249,7 +255,7 @@ onload = function (){
                 firstNameColumn.textContent = cursor.value.firstName;
                 lastNameColumn.textContent = cursor.value.lastName;
                 studentIdColumn.textContent = cursor.value.studentId;
-                deptColumn.textContent = cursor.value.dept;
+                deptColumn.textContent = cursor.value.department;
                 phoneColumn.textContent = cursor.value.phone;
                 bookLoanedColumn.textContent = cursor.value.bookTitle;
                 // dateLoanedColumn.textContent = new Date(cursor.value.dateLoaned).toLocaleDateString('en-US');
