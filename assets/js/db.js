@@ -1,9 +1,9 @@
 // Get UI elements
 const tableBody = document.querySelector('.table-body');
 // tableBody.children[0].children[0]    to access first td in the row / to access transaction id
-const addForm = document.querySelector('#addForm');
-const btn = document.querySelector('#add')
-
+const newLoadButton = document.querySelector("#gradient-button")
+var addForm;
+var addRecordButton;
 // Any method to get the dept of current user
 // --Use URL or as a single page app
 const currentDept = document.querySelector('#dept');
@@ -98,6 +98,14 @@ onload = function (){
     }
     //////////////////////////////////////////
 
+    
+    newLoanButton.addEventListener('click', getForm);
+    // Get form after modal opens
+    function getForm(){
+        addForm = document.querySelector('.add-record-form');
+        addRecordButton = document.querySelector('#addRecordButton');
+        addRecordButton.addEventListener('click', addTransaction);
+    }
 
     // addForm.addEventListener('submit', addTransaction);
     // btn.addEventListener('click', addTransaction);
