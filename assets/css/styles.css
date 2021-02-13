@@ -253,3 +253,29 @@ nav {
         display: block !important;
     }
 }
+
+.card{
+    margin-right: 300px;
+    margin-left: 100px;
+    height: 600px;
+    background-color: #32373D;
+}
+.card .card-header h1{
+    color: beige;
+
+}
+label{
+    color: beige;
+}
+
+textarea{
+    resize: none;
+    height:800px
+}
+.table{
+    padding-top: 50px;
+}
+table {
+    padding-right: 20px;
+    padding-left: 20px;
+}
