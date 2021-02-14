@@ -18,11 +18,13 @@ onload = function (){
     // Attaching ID to outgoing urls
     for (let i = 0; i < anchors.length; i++) {
         if (anchors[i].href.endsWith('.html')) {
-            anchors[i].href += '?id=' + currentDept;
+            anchors[i].href += '?dp=' + currentDept;
         }
     }
 
 
+    // Personalization Features
+    personalizeTableHeader();
 
 
     // //////// Defining database schema
@@ -79,7 +81,6 @@ onload = function (){
         dormOS.createIndex('phone', 'phone', { unique : false });
         dormOS.createIndex('department', 'department', { unique : false });
         dormOS.createIndex('dormNo', 'dormNo', { unique : false });
-        dormOS.createIndex('dormCondition', 'dormCondition', { unique : false })
         dormOS.createIndex('dateLoaned', 'dateLoaned', { unique : false });
         
 
@@ -116,10 +117,13 @@ onload = function (){
     // Get form after modal opens
     function getForm(){
         addForm = document.querySelector('.add-record-form');
+        personalizeFormInputs();
         addRecordButton = document.querySelector('#addRecordButton');
         addRecordButton.addEventListener('click', addTransaction);
     }
 
+
+    // ADD TRANSACTION ++++++++++++++++++++++++++++++++++
     // addForm.addEventListener('submit', addTransaction);
     function addTransaction(e){
         e.preventDefault();
@@ -200,6 +204,8 @@ onload = function (){
 
     }
 
+
+    // DISPLAY TRANSACTIONS //////////////////////////
     function displayTransactions(){
         while (tableBody.firstChild){
             tableBody.removeChild(tableBody.firstChild);

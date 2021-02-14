@@ -100,7 +100,7 @@ onload = function (){
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'L96',
+            'staffId' : 'F96',
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
