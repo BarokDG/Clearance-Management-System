@@ -292,7 +292,7 @@ onload = function (){
 
     }
 
-    tableBody.addEventListener('click', deleteItem)
+    // tableBody.addEventListener('click', deleteItem)
     // DELETE ITEM
    function deleteItem(e) {
     let transaction;
@@ -329,14 +329,14 @@ onload = function (){
             break;
     }
      if(confirm("Are you sure about the deletion?")){
-        let noteId = Number(e.target.parentNode.getAttribute('data-note-id'));
+        let noteId = Number(e.target.parentNode.parentNode.getAttribute('data-note-id'));
 
-        let request =  objectStore.delete(noteId);
+          objectStore.delete(noteId);
   
       //   report deletion
       transaction.oncomplete = function(){
           // delete parent of button 
-          e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+          e.target.parentNode.parentNode.remove();
           console.log('record '+ noteId + 'deleted');
            // Again, if list item is empty, display a 'No notes stored' message
            if(!tableBody.firstChild) {
