@@ -1,17 +1,30 @@
 // Get UI elements
 const tableBody = document.querySelector('.table-body');
 const newLoanButton = document.querySelector('#gradient-button');
+const anchors = document.querySelectorAll('a');
 var addForm;
 var addRecordButton;
 
 // Any method to get the dept of current user
 // --Use URL or as a single page app
-const currentDept = document.querySelector('#dept');
+const urlSearchParams = new URLSearchParams(window.location.search);
+const currentDept = urlSearchParams.get('dp');
 
 
 let db;
 
+
 onload = function (){
+    // Attaching ID to outgoing urls
+    for (let i = 0; i < anchors.length; i++) {
+        if (anchors[i].href.endsWith('.html')) {
+            anchors[i].href += '?id=' + currentDept;
+        }
+    }
+
+
+
+
     // //////// Defining database schema
     // Request to open or create database
     let request = indexedDB.open('ClearanceDB', 1);
@@ -131,34 +144,34 @@ onload = function (){
         // };
 
         // get deptId from url / other method
-        let dept = 01;
+        let dept = 'lib';
 
 
         // create transaction and get object store based on what dept is requesting access
         let transaction;
         let objectStore;
         // find out which table to store record on
-        switch (dept) {
+        switch (currentDept) {
             // library
-            case 01:
+            case 'lib':
                 transaction = db.transaction(['libraryOS'], 'readwrite');
                 objectStore = transaction.objectStore('libraryOS');
                 break;
 
             // sports
-            case 02:
+            case 'sps':
                 transaction = db.transaction(['sportsOS'], 'readwrite');
                 objectStore = transaction.objectStore('sportsOS');
                 break;
 
             // dorm
-            case 03:
+            case 'drm':
                 transaction = db.transaction(['dormOS'], 'readwrite');
                 objectStore = transaction.objectStore('dormOS');
                 break;
 
              // dept
-             case 04:
+             case 'dep':
                 transaction = db.transaction(['deptOS'], 'readwrite');
                 objectStore = transaction.objectStore('deptOS');
                 break;
@@ -195,29 +208,28 @@ onload = function (){
         // create transaction and get object store based on what dept is requesting access
         let transaction;
         let objectStore;
-        let dept = 01;
         // find out which table to store record on
-        switch (dept) {
+        switch (currentDept) {
             // library
-            case 01:
+            case 'lib':
                 transaction = db.transaction(['libraryOS'], 'readwrite');
                 objectStore = transaction.objectStore('libraryOS');
                 break;
 
             // sports
-            case 02:
+            case 'sps':
                 transaction = db.transaction(['sportsOS'], 'readwrite');
                 objectStore = transaction.objectStore('sportsOS');
                 break;
 
             // dorm
-            case 03:
+            case 'drm':
                 transaction = db.transaction(['dormOS'], 'readwrite');
                 objectStore = transaction.objectStore('dormOS');
                 break;
 
              // dept
-             case 04:
+             case 'dep':
                 transaction = db.transaction(['deptOS'], 'readwrite');
                 objectStore = transaction.objectStore('deptOS');
                 break;

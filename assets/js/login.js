@@ -100,7 +100,7 @@ onload = function (){
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'S96',
+            'staffId' : 'L96',
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
@@ -136,7 +136,7 @@ onload = function (){
         let password = document.querySelector('#password').value;
 
         let objectStore = db.transaction(["staffOS"]).objectStore("staffOS");
-        // let request =  objectStore.openCursor();
+        // let request =  objectStore.get();
         
 
         request.onerror =  function(e){
@@ -148,8 +148,29 @@ onload = function (){
                  alert("user not authenticated")
                  return;    
             }else{
-                
-                window.location.replace('./dash.html');
+                // The first letter of the staff ID indicates their department
+                let deptID;
+                switch (staffId[0]) {
+                    case 'L':
+                        deptID = 'lib';
+                        break;
+                    case 'S':
+                        deptID = 'sps';
+                        break;
+                    case 'D':
+                        deptID = 'drm';
+                        break;
+                    case 'F':
+                        deptID = 'dep';
+                        break;
+                    case 'A':
+                        deptID = 'adm';
+                        break;
+                    
+                    default:
+                        break;
+                };
+                window.location.replace('./dash.html?' + 'dp=' + deptID);
                  
             }
             
