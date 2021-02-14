@@ -96,12 +96,13 @@ onload = function (){
     function addStaffMembers() {
 	// Admin can add new staff here
         let newRecord = {
+        
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'S95',
+            'staffId' : 'S96',
             'phone' : 0911445566,
-            'password' : 'cldb'
+            'password' : 'cldb'    
         };
         transaction = db.transaction(['staffOS'], 'readwrite');
         objectStore = transaction.objectStore('staffOS');
@@ -134,18 +135,24 @@ onload = function (){
         let staffId = document.querySelector('#staffId').value;
         let password = document.querySelector('#password').value;
 
-        let objectStore = transaction = db.transaction(["staffOS"]).objectStore("staffOS");
-        let request =  objectStore.get(staffId);
+        let objectStore = db.transaction(["staffOS"]).objectStore("staffOS");
+        // let request =  objectStore.openCursor();
         
+
         request.onerror =  function(e){
             alert("user not Authenticated")
             return;
         };
-         request.onsuccess = function(e){
-             if(password != request.result.password){
+        objectStore.openCursor().onsuccess = function(e) {
+             if(password != e.target.result.value.password){
                  alert("user not authenticated")
                  return;    
+            }else{
+                
+                window.location.replace('./dash.html');
+                 
             }
+            
             console.log("You are Logged IN")
         }      
     }
