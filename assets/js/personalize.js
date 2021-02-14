@@ -1,4 +1,3 @@
-const tableHeader = document.querySelector('.thead-dark');
 // const newLoanButton = document.querySelector('#gradient-button');
 var addForm;
 
@@ -6,19 +5,23 @@ var addForm;
 const dept = currentDept;
 
 function personalizeTableHeader(){
-    let loanedColumn = tableHeader.firstElementChild.children[6];
+    let loanedColumn = tableHeader.firstElementChild.children[5];
     switch (dept) {
         case 'lib':
+            loanedColumn.id = 'bookTitle';
             loanedColumn.textContent = 'Book Title';
             break;
         case 'sps':
+            loanedColumn.id = 'equipment';
             loanedColumn.textContent = 'Sports Equipment';
             break;
         case 'drm':
+            loanedColumn.id = 'dormNo';
             loanedColumn.textContent = 'Dorm No.';
             break;
         case 'dep':
             tableHeader.firstElementChild.removeChild(loanedColumn)
+            tableHeader.firstElementChild.children[3].textContent = 'Semester Status'
             break;
         
         default:

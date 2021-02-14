@@ -18,18 +18,19 @@ onload = function (){
         // Insert loan transaction data into UI
         // displayTransactions();
         addStaffMembers();
+        addStudentMembers();
     }
 
     request.onupgradeneeded = (e) => {
         let db = e.target.result;
         
         ////// Library Dept Table
-        let libraryOS = db.createObjectStore('libraryOS', { keyPath: 'id', autoIncrement:true });
+        let libraryOS = db.createObjectStore('libraryOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         libraryOS.createIndex('firstName', 'firstName', { unique : false });
         libraryOS.createIndex('lastName', 'lastName', { unique : false });
-        libraryOS.createIndex('studentId', 'studentId', { unique : true });
+        // libraryOS.createIndex('studentId', 'studentId', { unique : true });
         libraryOS.createIndex('phone', 'phone', { unique : false });
         libraryOS.createIndex('department', 'department', { unique : false });
         libraryOS.createIndex('bookTitle', 'bookTitle', { unique : false });
@@ -37,12 +38,12 @@ onload = function (){
         
 
         /////// Sports Dept Table
-        let sportsOS = db.createObjectStore('sportsOS', { keyPath: 'id', autoIncrement:true });
+        let sportsOS = db.createObjectStore('sportsOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         sportsOS.createIndex('firstName', 'firstName', { unique : false });
         sportsOS.createIndex('lastName', 'lastName', { unique : false });
-        sportsOS.createIndex('studentId', 'studentId', { unique : true });
+        // sportsOS.createIndex('studentId', 'studentId', { unique : true });
         sportsOS.createIndex('phone', 'phone', { unique : false });
         sportsOS.createIndex('department', 'department', { unique : false });
         sportsOS.createIndex('equipment', 'equipment', { unique : false });
@@ -50,42 +51,50 @@ onload = function (){
         
 
         ////// Dormitory Dept Table 
-        let dormOS = db.createObjectStore('dormOS', { keyPath: 'id', autoIncrement:true });
+        let dormOS = db.createObjectStore('dormOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         dormOS.createIndex('firstName', 'firstName', { unique : false });
         dormOS.createIndex('lastName', 'lastName', { unique : false });
-        dormOS.createIndex('studentId', 'studentId', { unique : true });
+        // dormOS.createIndex('studentId', 'studentId', { unique : true });
         dormOS.createIndex('phone', 'phone', { unique : false });
         dormOS.createIndex('department', 'department', { unique : false });
         dormOS.createIndex('dormNo', 'dormNo', { unique : false });
-        dormOS.createIndex('dormCondition', 'dormCondition', { unique : false })
         dormOS.createIndex('dateLoaned', 'dateLoaned', { unique : false });
         
 
         ////// Department Table 
-        let deptOS = db.createObjectStore('deptOS', { keyPath: 'id', autoIncrement:true });
+        let deptOS = db.createObjectStore('deptOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         deptOS.createIndex('firstName', 'firstName', { unique : false });
         deptOS.createIndex('lastName', 'lastName', { unique : false });
-        deptOS.createIndex('studentId', 'studentId', { unique : true });
+        // deptOS.createIndex('studentId', 'studentId', { unique : true });
         deptOS.createIndex('phone', 'phone', { unique : false });
         deptOS.createIndex('semesterStatus', 'semesterStatus', { unique : false });
         
 
         ////// Staff Table 
-        let staffOS = db.createObjectStore('staffOS', { keyPath: 'id', autoIncrement:true });
+        let staffOS = db.createObjectStore('staffOS', { keyPath: 'staffId', autoIncrement:false });
         
         // creating columns
         staffOS.createIndex('firstName', 'firstName', { unique : false });
         staffOS.createIndex('lastName', 'lastName', { unique : false });
-        staffOS.createIndex('staffId', 'staffId', { unique : true });
         // --encrypt password
         staffOS.createIndex('password', 'password', { unique : false });
         staffOS.createIndex('phone', 'phone', { unique : false });
-        // staffOS.createIndex('semesterStatus', 'semesterStatus', { unique : false });
+
+
+
+        ////// Students Table 
+        let studentOS = db.createObjectStore('studentOS', { keyPath: 'studentId', autoIncrement:false });
         
+        // creating columns
+        studentOS.createIndex('firstName', 'firstName', { unique : false });
+        studentOS.createIndex('lastName', 'lastName', { unique : false });
+        studentOS.createIndex('phone', 'phone', { unique : false });
+        
+
         
         console.log('ClearanceDB upgraded.');
     }
@@ -100,7 +109,7 @@ onload = function (){
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'F96',
+            'staffId' : 'A1',
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
@@ -124,6 +133,36 @@ onload = function (){
         }
     }
 
+    // Add staff members
+    function addStudentMembers() {
+        // Admin can add new staff here
+            let newRecord = {
+            
+                'firstName' : 'Sports GUy Not so much',
+                'lastName' : 'B',
+                // studentId must be unique
+                'studentId' : 'TT/00/13',
+                'phone' : 0911445566,
+            };
+            transaction = db.transaction(['studentOS'], 'readwrite');
+            objectStore = transaction.objectStore('studentOS');
+            // add record to correct OS
+            let requestAddStaff = objectStore.add(newRecord);
+            requestAddStaff.onsuccess = () => {
+                // clear form / close modal
+                console.log('Add request successful.');
+            }
+            
+            transaction.oncomplete = () => {
+                console.log('Succesfully added new record.');
+                // display data
+                // displayTransactions();
+            }
+    
+            transaction.onerror = () => {
+                console.log('Error! Cannot add new record!' + request.error);
+            }
+        }
 
 /////////////////////
     loginbtn.addEventListener('click', login);
@@ -136,15 +175,19 @@ onload = function (){
         let password = document.querySelector('#password').value;
 
         let objectStore = db.transaction(["staffOS"]).objectStore("staffOS");
-        // let request =  objectStore.get();
+        let request =  objectStore.get(staffId);
         
 
         request.onerror =  function(e){
             alert("user not Authenticated")
             return;
         };
-        objectStore.openCursor().onsuccess = function(e) {
-             if(password != e.target.result.value.password){
+        request.onsuccess = function(e){
+            if(typeof(request.result) == 'undefined'){
+                alert("user not authenticated")
+                return;
+            }
+            else if(password != request.result.password){
                  alert("user not authenticated")
                  return;    
             }else{
@@ -165,7 +208,8 @@ onload = function (){
                         break;
                     case 'A':
                         deptID = 'adm';
-                        break;
+                        window.location.replace('./admin.html?' + 'dp=' + deptID);
+                        return;
                     
                     default:
                         break;

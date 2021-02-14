@@ -1,4 +1,5 @@
 // Get UI elements
+const tableHeader = document.querySelector('.thead-dark');
 const tableBody = document.querySelector('.table-body');
 const newLoanButton = document.querySelector('#gradient-button');
 const anchors = document.querySelectorAll('a');
@@ -46,12 +47,12 @@ onload = function (){
         let db = e.target.result;
         
         ////// Library Dept Table
-        let libraryOS = db.createObjectStore('libraryOS', { keyPath: 'id', autoIncrement:true });
+        let libraryOS = db.createObjectStore('libraryOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         libraryOS.createIndex('firstName', 'firstName', { unique : false });
         libraryOS.createIndex('lastName', 'lastName', { unique : false });
-        libraryOS.createIndex('studentId', 'studentId', { unique : true });
+        // libraryOS.createIndex('studentId', 'studentId', { unique : true });
         libraryOS.createIndex('phone', 'phone', { unique : false });
         libraryOS.createIndex('department', 'department', { unique : false });
         libraryOS.createIndex('bookTitle', 'bookTitle', { unique : false });
@@ -59,12 +60,12 @@ onload = function (){
         
 
         /////// Sports Dept Table
-        let sportsOS = db.createObjectStore('sportsOS', { keyPath: 'id', autoIncrement:true });
+        let sportsOS = db.createObjectStore('sportsOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         sportsOS.createIndex('firstName', 'firstName', { unique : false });
         sportsOS.createIndex('lastName', 'lastName', { unique : false });
-        sportsOS.createIndex('studentId', 'studentId', { unique : true });
+        // sportsOS.createIndex('studentId', 'studentId', { unique : true });
         sportsOS.createIndex('phone', 'phone', { unique : false });
         sportsOS.createIndex('department', 'department', { unique : false });
         sportsOS.createIndex('equipment', 'equipment', { unique : false });
@@ -72,12 +73,12 @@ onload = function (){
         
 
         ////// Dormitory Dept Table 
-        let dormOS = db.createObjectStore('dormOS', { keyPath: 'id', autoIncrement:true });
+        let dormOS = db.createObjectStore('dormOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         dormOS.createIndex('firstName', 'firstName', { unique : false });
         dormOS.createIndex('lastName', 'lastName', { unique : false });
-        dormOS.createIndex('studentId', 'studentId', { unique : true });
+        // dormOS.createIndex('studentId', 'studentId', { unique : true });
         dormOS.createIndex('phone', 'phone', { unique : false });
         dormOS.createIndex('department', 'department', { unique : false });
         dormOS.createIndex('dormNo', 'dormNo', { unique : false });
@@ -85,12 +86,12 @@ onload = function (){
         
 
         ////// Department Table 
-        let deptOS = db.createObjectStore('deptOS', { keyPath: 'id', autoIncrement:true });
+        let deptOS = db.createObjectStore('deptOS', { keyPath: 'studentId', autoIncrement:false });
         
         // creating columns
         deptOS.createIndex('firstName', 'firstName', { unique : false });
         deptOS.createIndex('lastName', 'lastName', { unique : false });
-        deptOS.createIndex('studentId', 'studentId', { unique : true });
+        // deptOS.createIndex('studentId', 'studentId', { unique : true });
         deptOS.createIndex('phone', 'phone', { unique : false });
         deptOS.createIndex('semesterStatus', 'semesterStatus', { unique : false });
         
@@ -105,7 +106,16 @@ onload = function (){
         // --encrypt password
         staffOS.createIndex('password', 'password', { unique : false });
         staffOS.createIndex('phone', 'phone', { unique : false });
-        staffOS.createIndex('semesterStatus', 'semesterStatus', { unique : false });
+
+
+
+        ////// Students Table 
+        let studentOS = db.createObjectStore('studentOS', { keyPath: 'studentId', autoIncrement:false });
+        
+        // creating columns
+        studentOS.createIndex('firstName', 'firstName', { unique : false });
+        studentOS.createIndex('lastName', 'lastName', { unique : false });
+        studentOS.createIndex('phone', 'phone', { unique : false });
         
         
         console.log('ClearanceDB upgraded.');
@@ -135,21 +145,9 @@ onload = function (){
         }
         console.log(newRecord);
         
-        // this obj literal will differ for d/f depts
-        // let newRecord = {
-        //     'firstName' : 'Abebe',
-        //     'lastName' : 'Kebede',
-        //     // studentId must be unique
-        //     'studentId' : 'ATR/1113/11',
-        //     'phone' : 0911445566,
-        //     'department' : 'Mechanical',
-        //     'bookTitle' : 'Stress: Calculating on Moving Objects By K.J. Brown',
-        //     'dateLoaned' : new Date('2/11/2021').getTime()
-        // };
+        
 
-        // get deptId from url / other method
-        let dept = 'lib';
-
+        // CHECK IF STUDENT IS IN THE DATABASE
 
         // create transaction and get object store based on what dept is requesting access
         let transaction;
@@ -182,6 +180,7 @@ onload = function (){
 
             default:
                 console.log('Wrong department value found!');
+                return;
                 break;
         }
 
@@ -234,14 +233,22 @@ onload = function (){
                 objectStore = transaction.objectStore('dormOS');
                 break;
 
-             // dept
-             case 'dep':
+            // dept
+            case 'dep':
                 transaction = db.transaction(['deptOS'], 'readwrite');
                 objectStore = transaction.objectStore('deptOS');
                 break;
+            
+            // admin
+            case 'adm':
+                displayClearanceStatus();
+                return;
+                break;
+
 
             default:
                 console.log('Wrong department value found!');
+                return;
                 break;
         }
 
@@ -250,32 +257,44 @@ onload = function (){
 
             if (cursor){
                 const tableRow = document.createElement('tr');
-                const idColumn = document.createElement('th');
+                // const idColumn = document.createElement('th');
+                const studentIdColumn = document.createElement('td');
                 const firstNameColumn = document.createElement('td');
                 const lastNameColumn = document.createElement('td');
-                const studentIdColumn = document.createElement('td');
                 const deptColumn = document.createElement('td');
                 const phoneColumn = document.createElement('td');
-                const bookLoanedColumn = document.createElement('td');
+                const loanedColumn = document.createElement('td');
                 // const dateLoanedColumn = document.createElement('td');
 
-                tableRow.appendChild(idColumn);
+                // tableRow.appendChild(idColumn);
+                tableRow.appendChild(studentIdColumn);
                 tableRow.appendChild(firstNameColumn);
                 tableRow.appendChild(lastNameColumn);
-                tableRow.appendChild(studentIdColumn);
                 tableRow.appendChild(deptColumn);
                 tableRow.appendChild(phoneColumn);
-                tableRow.appendChild(bookLoanedColumn);
+                tableRow.appendChild(loanedColumn);
                 // tableRow.appendChild(dateLoanedColumn);
                 tableBody.appendChild(tableRow);
 
-                idColumn.textContent = cursor.value.id;
+                // idColumn.textContent = cursor.value.id;
+                studentIdColumn.textContent = cursor.value.studentId;
                 firstNameColumn.textContent = cursor.value.firstName;
                 lastNameColumn.textContent = cursor.value.lastName;
-                studentIdColumn.textContent = cursor.value.studentId;
                 deptColumn.textContent = cursor.value.department;
                 phoneColumn.textContent = cursor.value.phone;
-                bookLoanedColumn.textContent = cursor.value.bookTitle;
+                switch (currentDept) {
+                    case 'lib':
+                        loanedColumn.textContent = cursor.value.bookTitle;
+                        break;
+                    case 'sps':
+                        loanedColumn.textContent = cursor.value.equipment;
+                        break;
+                    case 'drm':
+                        loanedColumn.textContent = cursor.value.dormNo;
+                        break;
+                    default:
+                        break;
+                }
                 // dateLoanedColumn.textContent = new Date(cursor.value.dateLoaned).toLocaleDateString('en-US');
 
                 cursor.continue();
