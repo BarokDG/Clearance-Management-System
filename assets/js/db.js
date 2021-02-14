@@ -267,7 +267,7 @@ onload = function (){
                 const del = document.createElement('Button')
                 
                 tableRow.appendChild(del);
-                del.textContent = 'Delete'
+                del.innerHTML = '<i class="fas fa-trash-alt"></i>'
 
                 del.onclick = deleteItem
                 // dateLoanedColumn.textContent = new Date(cursor.value.dateLoaned).toLocaleDateString('en-US');
@@ -325,7 +325,7 @@ onload = function (){
             console.log('Wrong department value found!');
             break;
     }
-     if(confirm("Are you sure about deletion?")){
+     if(confirm("Are you sure about the deletion?")){
         let noteId = Number(e.target.parentNode.getAttribute('data-note-id'));
 
         let request = objectStore.delete(noteId);
