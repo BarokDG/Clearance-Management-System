@@ -400,7 +400,7 @@ onload = function (){
         const searchItem = search.value
         
         if(cursor){
-            if(cursor.value.firstName.indexOf(searchItem)){
+            if(cursor.value.studentId.indexOf(searchItem)){
                 
             }else{
                 const tableRow = document.createElement('tr');
