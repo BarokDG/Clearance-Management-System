@@ -97,7 +97,7 @@ onload = function (){
         
 
         ////// Staff Table 
-        let staffOS = db.createObjectStore('staffOS', { keyPath: 'id', autoIncrement:true });
+        let staffOS = db.createObjectStore('staffOS', { keyPath: 'staffId', autoIncrement:true });
         
         // creating columns
         staffOS.createIndex('firstName', 'firstName', { unique : false });

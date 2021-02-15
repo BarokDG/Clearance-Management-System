@@ -109,7 +109,7 @@ onload = function (){
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'A1',
+            'staffId' : 'F96',
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
@@ -138,10 +138,10 @@ onload = function (){
         // Admin can add new staff here
             let newRecord = {
             
-                'firstName' : 'Sports GUy Not so much',
+                'firstName' : 'Sports GUy 101',
                 'lastName' : 'B',
                 // studentId must be unique
-                'studentId' : 'TT/00/13',
+                'studentId' : 'TT/11/00',
                 'phone' : 0911445566,
             };
             transaction = db.transaction(['studentOS'], 'readwrite');

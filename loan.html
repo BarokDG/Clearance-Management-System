@@ -195,6 +195,17 @@
     <!-- personalize for each department -->
     <script src="./assets/js/personalize.js"></script>
 
+    <script>
+        if (currentDept == 'adm'){
+                window.location.replace('./admin.html?dp=' + currentDept);
+                for (let i = 0; i < anchors.length; i++) {
+                    if (anchors[i].href.endsWith('.html')) {
+                        anchors[i].href += '?dp=' + currentDept;
+                    }
+                }
+        }
+    </script>
+
 </body>
 
 </html>
