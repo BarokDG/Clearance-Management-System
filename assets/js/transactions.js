@@ -154,6 +154,14 @@ function displayTransactions(){
             tableRow.appendChild(deptColumn);
             tableRow.appendChild(phoneColumn);
             tableRow.appendChild(loanedColumn);
+            tableRow.setAttribute('data-note-id', cursor.value.studentId);
+                // delete
+                const del = document.createElement('Button')
+                
+                tableRow.appendChild(del);
+                del.innerHTML = '<i class="fas fa-trash-alt"></i>'
+
+                del.onclick = deleteItem
             // tableRow.appendChild(dateLoanedColumn);
             tableBody.appendChild(tableRow);
 
@@ -196,3 +204,172 @@ function displayTransactions(){
     }
 
 }
+ // DELETE ITEM
+ function deleteItem(e) {
+    let transaction;
+    let objectStore;
+    let dept = 01;
+    // find out which table to store record on
+    switch (dept) {
+        // library
+        case 01:
+            transaction = db.transaction(['libraryOS'], 'readwrite');
+            objectStore = transaction.objectStore('libraryOS');
+            break;
+
+        // sports
+        case 02:
+            transaction = db.transaction(['sportsOS'], 'readwrite');
+            objectStore = transaction.objectStore('sportsOS');
+            break;
+
+        // dorm
+        case 03:
+            transaction = db.transaction(['dormOS'], 'readwrite');
+            objectStore = transaction.objectStore('dormOS');
+            break;
+
+         // dept
+         case 04:
+            transaction = db.transaction(['deptOS'], 'readwrite');
+            objectStore = transaction.objectStore('deptOS');
+            break;
+
+        default:
+            console.log('Wrong department value found!');
+            break;
+    }
+     if(confirm("Are you sure about the deletion?")){
+        let noteId = e.target.parentNode.parentNode.getAttribute('data-note-id');
+        console.log(e.target.parentNode.parentNode)
+        console.log(noteId);
+          objectStore.delete(noteId);
+  
+      //   report deletion
+      transaction.oncomplete = function(){
+          // delete parent of button 
+          e.target.parentNode.parentNode.remove();
+          console.log('record '+ noteId + 'deleted');
+           // Again, if list item is empty, display a 'No notes stored' message
+           if(!tableBody.firstChild) {
+              const tableRow = document.createElement('tr');
+              const tableData = document.createElement('td');
+              
+              tableData.textContent = 'No transactions recorded.';
+              tableRow.appendChild(tableData);
+              tableBody.appendChild(tableRow);
+            }
+          
+      }
+     }
+   }
+
+
+//    search item
+   search.addEventListener('keyup', searchRecord);
+   function searchRecord(e){
+    let transaction;
+    let objectStore;
+    let dept = 01;
+    // find out which table to store record on
+    switch (dept) {
+        // library
+        case 01:
+            transaction = db.transaction(['libraryOS'], 'readwrite');
+            objectStore = transaction.objectStore('libraryOS');
+            break;
+
+        // sports
+        case 02:
+            transaction = db.transaction(['sportsOS'], 'readwrite');
+            objectStore = transaction.objectStore('sportsOS');
+            break;
+
+        // dorm
+        case 03:
+            transaction = db.transaction(['dormOS'], 'readwrite');
+            objectStore = transaction.objectStore('dormOS');
+            break;
+
+         // dept
+         case 04:
+            transaction = db.transaction(['deptOS'], 'readwrite');
+            objectStore = transaction.objectStore('deptOS');
+            break;
+
+        default:
+            console.log('Wrong department value found!');
+            break;
+    }
+
+
+    while (tableBody.firstChild){
+        tableBody.removeChild(tableBody.firstChild);
+    }
+
+    objectStore.openCursor().onsuccess= function(e){
+        const cursor = e.target.result
+        const searchItem = search.value
+        
+        if(cursor){
+            if(cursor.value.studentId.indexOf(searchItem.toUpperCase())){
+                
+            }else{
+                const tableRow = document.createElement('tr');
+                const idColumn = document.createElement('th');
+                const firstNameColumn = document.createElement('td');
+                const lastNameColumn = document.createElement('td');
+                const studentIdColumn = document.createElement('td');
+                const deptColumn = document.createElement('td');
+                const phoneColumn = document.createElement('td');
+                const bookLoanedColumn = document.createElement('td');
+                
+                
+
+                // const dateLoanedColumn = document.createElement('td');
+
+                tableRow.appendChild(studentIdColumn);
+                tableRow.appendChild(firstNameColumn);
+                tableRow.appendChild(lastNameColumn);
+                
+                tableRow.appendChild(deptColumn);
+                tableRow.appendChild(phoneColumn);
+                tableRow.appendChild(bookLoanedColumn);
+                
+                // tableRow.appendChild(dateLoanedColumn);
+                tableBody.appendChild(tableRow);
+
+                // idColumn.textContent = cursor.value.id;
+                firstNameColumn.textContent = cursor.value.firstName;
+                lastNameColumn.textContent = cursor.value.lastName;
+                studentIdColumn.textContent = cursor.value.studentId;
+                deptColumn.textContent = cursor.value.department;
+                phoneColumn.textContent = cursor.value.phone;
+                bookLoanedColumn.textContent = cursor.value.bookTitle;
+                tableRow.setAttribute('data-note-id', cursor.value.studentId);
+                // delete
+                const del = document.createElement('Button')
+                del.innerHTML = '<i class="fas fa-trash-alt"></i>'
+
+                del.onclick = deleteItem
+                tableRow.appendChild(del);
+              
+
+            } cursor.continue();
+        }
+        else {
+            // Again, if list item is empty, display a 'No notes stored' message
+            if(!tableBody.firstChild) {
+              const tableRow = document.createElement('tr');
+              const tableData = document.createElement('td');
+              
+              tableData.textContent = 'No transaction record matched';
+              tableRow.appendChild(tableData);
+              tableBody.appendChild(tableRow);
+            }
+            // if there are no more cursor items to iterate through, say so
+            console.log('Notes all displayed');
+          }
+
+    }
+   } 
