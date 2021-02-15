@@ -1,0 +1,90 @@
+body {
+    align-items: center;
+    background-image: url('../images/Echo\ Lines\ 10\ -\ 16x9.jpg');
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#loginContent {
+    height: 80vh;
+    width: 60vw;
+}
+
+#loginContent>div {
+    display: block;
+    float: left;
+    height: 100%;
+}
+
+#slideshow {
+    background-color: #FFA6AA;
+    width: 55%;
+}
+
+#loginForm {
+    background-image: url("../images/minimalist\ triangles.jpg");
+    width: 45%;
+}
+
+input {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.7) !important;
+}
+
+input:focus {
+    box-shadow: none !important;
+}
+
+.container {
+    padding: 0 15%;
+}
+
+#infoCarousel,
+.carousel-inner,
+.carousel-item {
+    height: 100% !important;
+}
+
+.carousel-indicators li {
+    border-radius: 50%;
+    height: 10px;
+    margin: 0 5px;
+    width: 10px;
+}
+
+#svgImg {
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.svg {
+    margin-top: 20%;
+    text-align: center;
+}
+
+.svg img {
+    height: 300px !important;
+}
+
+@media screen and (max-width: 1000px) {
+    #slideshow {
+        display: none !important;
+    }
+
+    #loginForm {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #loginContent {
+        width: 85vw !important
+    }
+}

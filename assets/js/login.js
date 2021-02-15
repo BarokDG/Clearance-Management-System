@@ -1,33 +1,9 @@
-// Get UI elements
-const tableHeader = document.querySelector('.thead-dark');
-const tableBody = document.querySelector('.table-body');
-const newLoanButton = document.querySelector('#gradient-button');
-const search= document.querySelector('#search')
-const anchors = document.querySelectorAll('a');
-var addForm;
-var addRecordButton;
-
-// Any method to get the dept of current user
-// --Use URL or as a single page app
-const urlSearchParams = new URLSearchParams(window.location.search);
-const currentDept = urlSearchParams.get('dp');
+const loginbtn = document.querySelector('.btn');
 
 
 let db;
 
-
 onload = function (){
-    // Attaching ID to outgoing urls
-    for (let i = 0; i < anchors.length; i++) {
-        if (anchors[i].href.endsWith('.html')) {
-            anchors[i].href += '?dp=' + currentDept;
-        }
-    }
-
-
-    // Personalization Features
-
-
     // //////// Defining database schema
     // Request to open or create database
     let request = indexedDB.open('ClearanceDB', 1);
@@ -40,8 +16,9 @@ onload = function (){
         console.log('ClearanceDB opened.');
         db = request.result;
         // Insert loan transaction data into UI
-        displayTransactions();
-        personalizeTableHeader();
+        // displayTransactions();
+        addStaffMembers();
+        addStudentMembers();
     }
 
     request.onupgradeneeded = (e) => {
@@ -98,12 +75,11 @@ onload = function (){
         
 
         ////// Staff Table 
-        let staffOS = db.createObjectStore('staffOS', { keyPath: 'id', autoIncrement:true });
+        let staffOS = db.createObjectStore('staffOS', { keyPath: 'staffId', autoIncrement:false });
         
         // creating columns
         staffOS.createIndex('firstName', 'firstName', { unique : false });
         staffOS.createIndex('lastName', 'lastName', { unique : false });
-        staffOS.createIndex('staffId', 'staffId', { unique : true });
         // --encrypt password
         staffOS.createIndex('password', 'password', { unique : false });
         staffOS.createIndex('phone', 'phone', { unique : false });
@@ -118,17 +94,132 @@ onload = function (){
         studentOS.createIndex('lastName', 'lastName', { unique : false });
         studentOS.createIndex('phone', 'phone', { unique : false });
         
+
+        
+        console.log('ClearanceDB upgraded.');
+    }
+    //////////////////////////////////////////
+
+    
+    // Add staff members
+    function addStaffMembers() {
+	// Admin can add new staff here
+        let newRecord = {
+        
+            'firstName' : 'Abebe',
+            'lastName' : 'Kebede',
+            // studentId must be unique
+            'staffId' : 'A1',
+            'phone' : 0911445566,
+            'password' : 'cldb'    
+        };
+        transaction = db.transaction(['staffOS'], 'readwrite');
+        objectStore = transaction.objectStore('staffOS');
+        // add record to correct OS
+        let requestAddStaff = objectStore.add(newRecord);
+        requestAddStaff.onsuccess = () => {
+            // clear form / close modal
+            console.log('Add request successful.');
+        }
+        
         transaction.oncomplete = () => {
             console.log('Succesfully added new record.');
             // display data
-            displayTransactions();
+            // displayTransactions();
         }
 
         transaction.onerror = () => {
             console.log('Error! Cannot add new record!' + request.error);
         }
-
     }
 
+    // Add staff members
+    function addStudentMembers() {
+        // Admin can add new staff here
+            let newRecord = {
+            
+                'firstName' : 'Keke',
+                'lastName' : 'B',
+                // studentId must be unique
+                'studentId' : 'TT/99/00',
+                'phone' : 0911445566,
+            };
+            transaction = db.transaction(['studentOS'], 'readwrite');
+            objectStore = transaction.objectStore('studentOS');
+            // add record to correct OS
+            let requestAddStaff = objectStore.add(newRecord);
+            requestAddStaff.onsuccess = () => {
+                // clear form / close modal
+                console.log('Add request successful.');
+            }
+            
+            transaction.oncomplete = () => {
+                console.log('Succesfully added new record.');
+                // display data
+                // displayTransactions();
+            }
     
+            transaction.onerror = () => {
+                console.log('Error! Cannot add new record!' + request.error);
+            }
+        }
+
+/////////////////////
+    loginbtn.addEventListener('click', login);
+
+    function login (e){
+
+        e.preventDefault()
+
+        let staffId = document.querySelector('#staffId').value;
+        let password = document.querySelector('#password').value;
+
+        let objectStore = db.transaction(["staffOS"]).objectStore("staffOS");
+        let request =  objectStore.get(staffId);
+        
+
+        request.onerror =  function(e){
+            alert("user not Authenticated")
+            return;
+        };
+        request.onsuccess = function(e){
+            if(typeof(request.result) == 'undefined'){
+                alert("user not authenticated")
+                return;
+            }
+            else if(password != request.result.password){
+                 alert("user not authenticated")
+                 return;    
+            }else{
+                // The first letter of the staff ID indicates their department
+                let deptID;
+                switch (staffId[0]) {
+                    case 'L':
+                        deptID = 'lib';
+                        break;
+                    case 'S':
+                        deptID = 'sps';
+                        break;
+                    case 'D':
+                        deptID = 'drm';
+                        break;
+                    case 'F':
+                        deptID = 'dep';
+                        break;
+                    case 'A':
+                        deptID = 'adm';
+                        window.location.replace('./admin.html?' + 'dp=' + deptID);
+                        return;
+                    
+                    default:
+                        break;
+                };
+                window.location.replace('./dash.html?' + 'dp=' + deptID);
+                 
+            }
+            
+            console.log("You are Logged IN")
+        }      
+    }
+
 }
