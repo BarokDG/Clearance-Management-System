@@ -138,10 +138,10 @@ onload = function (){
         // Admin can add new staff here
             let newRecord = {
             
-                'firstName' : 'Keke',
+                'firstName' : 'Sports GUy Not so much',
                 'lastName' : 'B',
                 // studentId must be unique
-                'studentId' : 'TT/99/00',
+                'studentId' : 'TT/00/13',
                 'phone' : 0911445566,
             };
             transaction = db.transaction(['studentOS'], 'readwrite');
