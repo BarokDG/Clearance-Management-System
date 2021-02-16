@@ -80,11 +80,23 @@
                 </div>
             </nav>
 
-            <div class="dash-content mt-3">
-                <div id="chart"></div>
-                <div id="pieChart" class="pieChart"></div>
-                <div id="pieChart2" class="pieChart"></div>
-                <div id="pieChart3" class="pieChart"></div>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div id="pieChart" class="pieChart"></div>
+                    </div>
+                    <div class="col">
+                        <div id="pieChart2" class="pieChart"></div>
+                    </div>
+                    <div class="col">
+                        <div id="pieChart3" class="pieChart"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -108,42 +120,10 @@
 
     <!-- Personalize -->
     <!-- <script src="/assets/js/personalize.js"></script> -->
-    
+
     <!-- ApexCharts js -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-        var options = {
-            chart: {
-                type: 'bar'
-            },
-            series: [{
-                name: 'sales',
-                data: [30, 40, 45, 50, 49, 60, 70, 91, 25]
-            }],
-            xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-            }
-        }
-
-        var optionsPie = {
-            chart: {
-                type: 'pie'
-            },
-            series: [44, 55, 13, 33],
-            labels: ['Apple', 'Mango', 'Orange', 'Watermelon']
-        }
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        var pieChart = new ApexCharts(document.querySelector("#pieChart"), optionsPie);
-        var pieChart2 = new ApexCharts(document.querySelector("#pieChart2"), optionsPie);
-        var pieChart3 = new ApexCharts(document.querySelector("#pieChart3"), optionsPie);
-
-        chart.render();
-        pieChart.render();
-        pieChart2.render();
-        pieChart3.render();
-        
-    </script>
+    <script src="./assets/js/apexscript.js"></script>
 
 </body>
 

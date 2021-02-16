@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan</title>
+    <title>Admin</title>
 
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -21,8 +21,8 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Open+Sans&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Open+Sans:wght@300;400;600;700&display=swap">
 
 </head>
 
@@ -42,8 +42,8 @@
                 <h3 class="heading">AAIT Clearance System</h3>
             </div>
 
-            <a href="./dash.html"><button><i class="fas fa-tachometer-slowest"></i>Dashboard</button></a>
-            <a href="./loan.html"><button class="active"><i class="fas fa-books"></i>Students</button></a>
+            <a href="./dash.html"><button class="active"><i class="fas fa-tachometer-slowest"></i>Dashboard</button></a>
+            <a href="./loan.html"><button><i class="fas fa-books"></i>Students</button></a>
             <a href=""><button><i class="fas fa-info-circle"></i>How To Use</button></a>
             <a href=""><button><i class="fas fa-bell"></i>Announcements</button></a>
             <a href=""><button><i class="fas fa-sign-out-alt"></i>Log out</button></a>
@@ -53,9 +53,9 @@
 
             <h3 class="heading my-5">AAIT Clearance System</h3>
 
-            <a href="./dash.html"><button class="side-button"><i
+            <a href="./dash.html"><button class="side-button active"><i
                         class="fas fa-tachometer-slowest fa-2x"></i>Dashboard</button></a>
-            <a href="./loan.html"><button class="side-button active"><i class="fas fa-books fa-2x"></i>Students</button></a>
+            <a href="./loan.html"><button class="side-button"><i class="fas fa-books fa-2x"></i>Students</button></a>
             <a href=""><button class="side-button"><i class="fas fa-info-circle fa-2x"></i>How To Use</button></a>
             <a href=""><button class="side-button"><i class="fas fa-bell fa-2x"></i>Announcements</button></a>
             <a href=""><button class="side-button"><i class="fas fa-sign-out-alt fa-2x"></i>Log out</button></a>
@@ -77,14 +77,84 @@
                         </svg>
                     </button>
 
-                    <a class="navbar-brand" href="#">Loan</a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
             </nav>
 
-            <div class="main-content mt-3">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-title">Total number of Students</p>
+                                        <p class="stat-value">4000 <i class="fas fa-graduation-cap"></i></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-title">Gender Ratio (Males/Females)</p>
+                                        <p class="stat-value">1.5 <i class="fa fa-venus-mars"></i></p>
+                                        <!-- <div id="statusbar"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-title">Number of students cleared</p>
+                                        <p class="stat-value">1200 <i class="fas fa-check"></i></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-title">Number of students uncleared</p>
+                                        <p class="stat-value">2800 <i class="fas fa-user-clock"></i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-5 justify-content-around">
+                    <div class="col-md-5 mb-3" id="radial_bar">
+                    </div>
+                    <div class="col-md-6" id="messages">
+                        <div class="row">
+                            <div class="col-12 sticky-top text-center bg-dark text-light mt-0 p-2">Recent Messages</div>
+                            <div class="col-12">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum
+                                repellat placeat quasi blanditiis. Aliquam placeat molestiae ipsum quisquam eius,
+                                maiores eum repellendus minima unde doloribus eaque, voluptatum blanditiis adipisci
+                                provident!</div>
+                            <div class="col-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere,
+                                aspernatur!</div>
+                            <div class="col-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt mollitia
+                                ut, sit totam quia quibusdam autem? Placeat excepturi quidem fuga.</div>
+                            <div class="col-12">Lorem ipsum, dolor sit amet consectetur adipisicing.</div>
+                            <div class="col-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ex
+                                similique illum sunt, necessitatibus assumenda temporibus tempore molestias atque
+                                placeat quo nulla labore maxime laborum architecto soluta perspiciatis totam autem!
+                                Dolor ipsam dignissimos hic laboriosam, minus distinctio in iste tempore similique non
+                                magnam aliquam aperiam, ipsum necessitatibus? Ratione, ipsa blanditiis?</div>
+                            <div class="col-12">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit delectus,
+                                at vero dolore minima earum corporis aperiam. Ducimus eius culpa labore ex odit aperiam
+                                ad doloremque modi?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div id="chart"></div>
+                    </div>
+                </div>
 
                 <!-- Search Bar -->
-                <div class="search-bar">
+                <!-- <div class="search-bar">
                     <input type="search" id="search" placeholder="Search">
                     <button type="button" class="btn btn-info" id="gradient-button" data-toggle="modal"
                         data-target="#exampleModal">New Loan
@@ -104,12 +174,11 @@
                             <th scope="col">All Done</th>
                         </tr>
                     </thead>
-                    <tbody class="table-body">
-                        <!-- DATA TO BE ENTERED -->
-                    </tbody>
-                </table>
+                    <tbody class="table-body"> -->
+                <!-- DATA TO BE ENTERED -->
+                <!-- </tbody>
+                </table> -->
             </div>
-
         </div>
     </div>
 
@@ -138,6 +207,10 @@
 
     <!-- personalize for each department -->
     <script src="../assets/js/personalize.js"></script>
+
+    <!-- ApexCharts js -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="./assets/js/apexscript.js"></script>
 
 </body>
 

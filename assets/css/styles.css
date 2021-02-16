@@ -35,7 +35,7 @@
 }
 
 .sidebar button:hover {
-    box-shadow: inset 0 0 100px 100px rgba(0, 105, 107, 0.5);
+    box-shadow: inset 0 0 100px 100px #cdcdcd25;
 }
 
 .sidebar a {
@@ -74,8 +74,7 @@ i {
 
 /* Main Container */
 .main-container {
-    background-image: url("../images/free-vector-blue-texture-halftone-background.jpg");
-    background-size: cover;
+    background-color: #F7F9FA;
     grid-column-start: 2;
     min-height: 100vh;
     width: 100%;
@@ -105,6 +104,84 @@ i {
     margin-left: 5%;
     max-width: 350px;
 }
+
+.card {
+    border: 1px solid red;
+    height: 8rem;
+}
+
+.card-title {
+    color: #757575;
+    font-size: 1rem;
+    width: 9rem;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 400;
+    position: relative;
+}
+
+p>i {
+    border-radius: 50%;
+    bottom: 80%;
+    color: white;
+    left: 80%;
+    padding: 10px;
+    position: absolute;
+}
+
+.fa-venus-mars {
+    background-color: #F5365C;
+}
+
+.fa-graduation-cap {
+    background-color: #FB6340;
+}
+
+.fa-check {
+    background-color: #FFD600;
+}
+
+.fa-user-clock {
+    background-color: #11CDEF;
+}
+
+#radial_bar {
+    background-color: white;
+}
+
+
+/* Message box */
+#messages {
+    background-color: white;
+    border: none;
+    height: 20rem !important;
+    overflow-y: auto;
+}
+
+#messages > .row > div {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    display: -webkit-box;
+    margin-top: .5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#messages > .row > div:hover {
+    position: relative;
+    bottom: 5px;
+}
+
+#messages > .row > div:first-child {
+    font-size: 1.2rem;
+}
+
+/* .statusbar {
+    
+} */
 
 /* Loan Page */
 /* Search bar inside the main container */
@@ -162,8 +239,27 @@ nav {
 }
 
 /* Table */
+thead {
+    background-color: white;
+    border-bottom: 2px solid red;
+}
+
 .table-responsive {
     display: table !important;
+}
+
+th {
+    border: none !important;
+    color: #757575;
+    font-weight: lighter;
+}
+
+tr {
+    background-color: white;
+}
+
+.table-bordered td {
+    border: 1px solid white;
 }
 
 /* Responsiveness */
@@ -206,7 +302,7 @@ nav {
     }
 
     .side-button:hover {
-        box-shadow: inset 0 0 100px 100px rgba(150, 150, 150, 0.3);
+        box-shadow: inset 0 0 100px 100px rgba(150, 150, 150, 0.302);
     }
 
     .fa-2x {
@@ -256,10 +352,6 @@ nav {
 
     nav {
         display: block !important;
-    }
-
-    table {
-        overflow-x: scroll;
     }
 
     .navbar-brand {
