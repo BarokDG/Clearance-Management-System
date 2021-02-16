@@ -23,6 +23,20 @@ function personalizeTableHeader(){
             tableHeader.firstElementChild.removeChild(loanedColumn)
             tableHeader.firstElementChild.children[3].textContent = 'Semester Status'
             break;
+
+        case 'adm':
+            const deptColumn = document.createElement('th')
+            const allColumn = document.createElement('th')
+            
+            tableHeader.firstElementChild.appendChild(deptColumn)
+            tableHeader.firstElementChild.appendChild(allColumn)
+ 
+            tableHeader.firstElementChild.children[3].textContent = 'Library'
+            tableHeader.firstElementChild.children[4].textContent = 'Sports'
+            tableHeader.firstElementChild.children[5].textContent = 'Dorm'
+            tableHeader.firstElementChild.children[6].textContent = 'Department'
+            tableHeader.firstElementChild.children[7].textContent = 'All Clear'
+
         
         default:
             break;

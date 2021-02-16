@@ -208,29 +208,29 @@ function displayTransactions(){
  function deleteItem(e) {
     let transaction;
     let objectStore;
-    let dept = 01;
+   
     // find out which table to store record on
-    switch (dept) {
+    switch (currentDept) {
         // library
-        case 01:
+        case 'lib':
             transaction = db.transaction(['libraryOS'], 'readwrite');
             objectStore = transaction.objectStore('libraryOS');
             break;
 
         // sports
-        case 02:
+        case 'sps':
             transaction = db.transaction(['sportsOS'], 'readwrite');
             objectStore = transaction.objectStore('sportsOS');
             break;
 
         // dorm
-        case 03:
+        case 'drm':
             transaction = db.transaction(['dormOS'], 'readwrite');
             objectStore = transaction.objectStore('dormOS');
             break;
 
          // dept
-         case 04:
+         case 'dep':
             transaction = db.transaction(['deptOS'], 'readwrite');
             objectStore = transaction.objectStore('deptOS');
             break;
@@ -270,29 +270,29 @@ function displayTransactions(){
    function searchRecord(e){
     let transaction;
     let objectStore;
-    let dept = 01;
+
     // find out which table to store record on
-    switch (dept) {
+    switch (currentDept) {
         // library
-        case 01:
+        case 'lib':
             transaction = db.transaction(['libraryOS'], 'readwrite');
             objectStore = transaction.objectStore('libraryOS');
             break;
 
         // sports
-        case 02:
+        case 'sps':
             transaction = db.transaction(['sportsOS'], 'readwrite');
             objectStore = transaction.objectStore('sportsOS');
             break;
 
         // dorm
-        case 03:
+        case 'drm':
             transaction = db.transaction(['dormOS'], 'readwrite');
             objectStore = transaction.objectStore('dormOS');
             break;
 
          // dept
-         case 04:
+         case 'dep':
             transaction = db.transaction(['deptOS'], 'readwrite');
             objectStore = transaction.objectStore('deptOS');
             break;
