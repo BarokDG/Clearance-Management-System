@@ -161,6 +161,11 @@ nav {
     width: 50px;
 }
 
+/* Table */
+.table-responsive {
+    display: table !important;
+}
+
 /* Responsiveness */
 @media screen and (max-width: 1000px) {
     #grid-container {
@@ -220,7 +225,7 @@ nav {
 
 @media screen and (max-width: 700px) {
     #grid-container {
-        grid-template-columns: auto;
+        display: block;
     }
 
     .menu-btn {
@@ -228,7 +233,7 @@ nav {
     }
 
     .sidebar-small {
-        width: 50%;
+        width: 30%;
         z-index: 1;
     }
 
@@ -238,7 +243,7 @@ nav {
     }
 
     .sidebar-small-hide {
-        left: -50% !important;
+        left: -30% !important;
     }
 
     .sidebar-small .heading {
@@ -251,5 +256,34 @@ nav {
 
     nav {
         display: block !important;
+    }
+
+    table {
+        overflow-x: scroll;
+    }
+
+    .navbar-brand {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .sidebar-small {
+        width: 50%;
+    }
+
+    .sidebar-small-hide {
+        left: -50% !important;
+    }
+
+    .table-responsive {
+        display: block !important;
+    }
+
+    th:first-child,
+    td:first-child {
+        position: sticky !important;
+        left: 0px !important;
+        background-color: grey;
     }
 }

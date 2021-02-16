@@ -1,9 +1,23 @@
 const loginbtn = document.querySelector('.btn');
 
+const show_password = document.querySelector('#show_password');
+const passwordInput = document.querySelector('#password');
+
 
 let db;
 
 onload = function (){
+    show_password.addEventListener('click', show);
+
+    function show () {
+        show_password.classList.toggle("fa-eye-slash");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+    
     // //////// Defining database schema
     // Request to open or create database
     let request = indexedDB.open('ClearanceDB', 1);

@@ -1,6 +1,6 @@
 body {
     align-items: center;
-    background-image: url('../images/Echo\ Lines\ 10\ -\ 16x9.jpg');
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('../images/Geo\ Dots\ Forest\ -\ 16x9.jpg');
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -18,7 +18,7 @@ body {
 }
 
 #slideshow {
-    background-color: #FFA6AA;
+    /* background-color: #FFA6AA; */
     width: 55%;
 }
 
@@ -31,6 +31,16 @@ input {
     background-color: transparent !important;
     border: none !important;
     border-bottom: 1px solid rgba(100, 100, 100, 0.7) !important;
+}
+
+.eye-div {
+    position: relative;
+}
+
+#show_password {
+    position: absolute;
+    top: 12px;
+    left: 90%;
 }
 
 input:focus {
