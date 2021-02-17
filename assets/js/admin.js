@@ -114,7 +114,7 @@ function searchAdmin(e){
             
         }
         else{
-            item.style.display = "block"
+            item.style.display = "flex-inline"
             
         }
     });
