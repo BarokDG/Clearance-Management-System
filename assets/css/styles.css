@@ -262,6 +262,17 @@ tr {
     border: 1px solid white;
 }
 
+
+/* Annoucnements Page */
+textarea{
+    border: thin solid;
+    border-radius: 5%;
+    height: 80vh;
+    outline: none;
+    width: 100%;
+}
+
+
 /* Responsiveness */
 @media screen and (max-width: 1000px) {
     #grid-container {
@@ -374,8 +385,10 @@ tr {
 
     th:first-child,
     td:first-child {
-        position: sticky !important;
+        background-color: blueviolet;
+        color: white;
         left: 0px !important;
-        background-color: grey;
+        position: sticky !important;
+
     }
 }
