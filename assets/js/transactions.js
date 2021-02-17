@@ -297,6 +297,11 @@ function displayTransactions(){
             objectStore = transaction.objectStore('deptOS');
             break;
 
+            case 'adm':
+                searchAdmin();
+                return;
+                break;
+
         default:
             console.log('Wrong department value found!');
             break;

@@ -68,4 +68,3 @@ function personalizeFormInputs(){
             break;
     }
 }
-

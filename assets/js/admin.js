@@ -74,6 +74,7 @@ function displayClearanceStatus(){
             const dormColumn = document.createElement('td');
             const deptColumn = document.createElement('td');
             const allColumn = document.createElement('td');
+            tableRow.className = "collection-item";
             
             tableRow.appendChild(studentIdColumn);
             tableRow.appendChild(firstNameColumn);
@@ -100,4 +101,23 @@ function displayClearanceStatus(){
 
     }
     
+}
+search.addEventListener('keyup', searchAdmin);
+function searchAdmin(e){
+    let searchItem  = search.value
+    let collection = document.querySelectorAll(".collection-item");
+
+    collection.forEach((item) =>{
+        if(item.textContent.indexOf(searchItem.toUpperCase())){
+            item.style.display = "none";
+           
+            
+        }
+        else{
+            item.style.display = "block"
+            
+        }
+    });
+
+    console.log("task filter ... ")
 }
