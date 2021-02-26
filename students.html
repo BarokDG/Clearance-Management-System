@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/images/svg files/favicon.svg">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Open+Sans&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="grid-container">
+        <div class="sidebar">
+            <div class="svg-div">
+                <svg style="margin: 0; padding: 0;" width='177' height='100' viewBox='0 0 177 100' fill='none'
+                    xmlns='http://www.w3.org/2000/svg'>
+                    <circle cx='72' cy='50' r='30' fill='#68DBFF' />
+                    <ellipse cx='104.647' cy='50' rx='29.7059' ry='30' fill='#FF7917' />
+                    <path fill-rule='evenodd' clip-rule='evenodd'
+                        d='M88.4039 75.1221C96.5911 69.7652 102 60.5143 102 50C102 39.4858 96.5911 30.2348 88.4039 24.878C80.2971 30.2348 74.9412 39.4858 74.9412 50C74.9412 60.5143 80.2971 69.7652 88.4039 75.1221Z'
+                        fill='#5D2C02' />
+                </svg>
+
+                <h3 class="heading">AAIT Clearance System</h3>
+            </div>
+
+            <a href="./dash.html"><button class="active"><i class="fas fa-tachometer-slowest"></i>Dashboard</button></a>
+            <a href=""><button><i class="fas fa-info-circle"></i>How To Use</button></a>
+            <a href="./index.html"><button><i class="fas fa-sign-out-alt"></i>Log out</button></a>
+        </div>
+
+        <div class="sidebar-small sidebar-small-hide">
+
+            <h3 class="heading my-5">AAIT Clearance System</h3>
+
+            <a href="./dash.html"><button class="side-button active"><i
+                        class="fas fa-tachometer-slowest fa-2x"></i>Dashboard</button></a>
+            <a href=""><button class="side-button"><i class="fas fa-info-circle fa-2x"></i>How To Use</button></a>
+            <a href="./index.html"><button class="side-button"><i class="fas fa-sign-out-alt fa-2x"></i>Log
+                    out</button></a>
+
+        </div>
+
+        <div class="main-container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light py-1 sticky-top">
+                <div class="ribbon">
+                    <button class="menu-btn">
+                        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
+                            style="pointer-events: none; display: block; width: 100%; height: 100%;"
+                            class="style-scope yt-icon">
+                            <g class="style-scope yt-icon">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" class="style-scope yt-icon">
+                                </path>
+                            </g>
+                        </svg>
+                    </button>
+
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+            </nav>
+
+            <div class="container mt-3">
+                <div class="jumbotron py-4">
+                    <p class="display-4">
+                        Student Clearance Portal
+                    </p>
+                    <button onclick=newProgress()>clickme</button>
+                </div>
+
+                <div class="progress mx-auto position-relative">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%; opacity: 0.8;"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                    <p class="text-dark font-weight-bold">
+                        0% completed
+                    </p>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header">Library</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <p class="card-text">Request Date: </p>
+                                        <p class="card-text">Response Date: </p>
+                                    </div>
+                                    <div class="col-md-6 text-center align-self-center">
+                                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header">Sports Master</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <p class="card-text">Request Date: </p>
+                                        <p class="card-text">Response Date: </p>
+                                    </div>
+                                    <div class="col-md-6 text-center align-self-center">
+                                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header">Department</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <p class="card-text">Request Date: </p>
+                                        <p class="card-text">Response Date: </p>
+                                    </div>
+                                    <div class="col-md-6 text-center align-self-center">
+                                        <i class="fas fa-exclamation-triangle fa-5x text-danger"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header">Dorm</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <p class="card-text">Request Date: </p>
+                                        <p class="card-text">Response Date: </p>
+                                    </div>
+                                    <div class="col-md-6 text-center align-self-center">
+                                        <i class="fas fa-user-clock fa-5x text-secondary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bootstrap script -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
+        </script>
+
+        <!-- for sidebar responsiveness -->
+        <script src="./assets/js/sidebar.js"></script>
+
+        <!-- DB -->
+        <script src="./assets/js/db.js"></script>
+
+        <!-- Personalize -->
+        <!-- <script src="/assets/js/personalize.js"></script> -->
+
+        <!-- ApexCharts js -->
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="./assets/js/apexscript.js"></script>
+
+        <script>
+            var progress = document.querySelector('.progress-bar');
+
+            function newProgress() {
+                input = prompt("Enter new value: ")
+                progress.style = `width: ${input}%`;
+
+                var progressString = progress.style.width
+                progressString = parseInt(progressString.replace('%', ''))
+
+                var progressIndicator = document.querySelector('.progress p')
+                progressIndicator.innerHTML = `${progress.style.width} completed`
+
+                if (progressString <= 25) {
+                    progress.classList.remove('bg-warning', 'bg-danger', 'bg-success')
+                    progress.classList.add('bg-danger');
+                } else if (progressString <= 75) {
+                    progress.classList.remove('bg-warning', 'bg-danger', 'bg-success')
+                    progress.classList.add('bg-warning')
+                } else if (progressString == 100) {
+                    progress.classList.remove('bg-warning', 'bg-danger', 'bg-success')
+                    progress.classList.add('bg-success')
+                }
+            }
+        </script>
+
+</body>
+
+</html>

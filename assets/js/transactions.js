@@ -157,6 +157,8 @@ function displayTransactions(){
             tableRow.setAttribute('data-note-id', cursor.value.studentId);
                 // delete
                 const del = document.createElement('Button')
+
+                del.classList.add('delete-button');
                 
                 tableRow.appendChild(del);
                 del.innerHTML = '<i class="fas fa-trash-alt"></i>'

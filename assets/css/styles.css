@@ -105,12 +105,12 @@ i {
     max-width: 350px;
 }
 
-.card {
+.card.adminCard {
     border: 1px solid red;
     height: 8rem;
 }
 
-.card-title {
+.card-title.adminTitle {
     color: #757575;
     font-size: 1rem;
     width: 9rem;
@@ -143,7 +143,7 @@ p>i {
     background-color: #FFD600;
 }
 
-.fa-user-clock {
+.stat-value .fa-user-clock {
     background-color: #11CDEF;
 }
 
@@ -151,37 +151,17 @@ p>i {
     background-color: white;
 }
 
-
-/* Message box */
-#messages {
-    background-color: white;
-    border: none;
-    height: 20rem !important;
-    overflow-y: auto;
+/* Student Dashboard */
+.progress {
+    width: 75%;
 }
 
-#messages > .row > div {
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-
-    display: -webkit-box;
-    margin-top: .5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.progress p {
+    left: 45%;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
 }
-
-#messages > .row > div:hover {
-    position: relative;
-    bottom: 5px;
-}
-
-#messages > .row > div:first-child {
-    font-size: 1.2rem;
-}
-
-/* .statusbar {
-    
-} */
 
 /* Loan Page */
 /* Search bar inside the main container */
@@ -206,6 +186,13 @@ p>i {
 
 #gradient-button:hover {
     background: linear-gradient(to left, #8e2de2, #4a00e0);
+}
+
+.delete-button {
+    border: none;
+    color: red;
+    margin: 10px auto;
+    outline: none !important;
 }
 
 /* Navbar */
@@ -260,16 +247,6 @@ tr {
 
 .table-bordered td {
     border: 1px solid white;
-}
-
-
-/* Annoucnements Page */
-textarea{
-    border: thin solid;
-    border-radius: 5%;
-    height: 80vh;
-    outline: none;
-    width: 100%;
 }
 
 
@@ -367,6 +344,10 @@ textarea{
 
     .navbar-brand {
         display: block;
+    }
+
+    .progress {
+        width: 100%;
     }
 }
 
