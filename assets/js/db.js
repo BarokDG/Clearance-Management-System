@@ -98,12 +98,11 @@ onload = function (){
         
 
         ////// Staff Table 
-        let staffOS = db.createObjectStore('staffOS', { keyPath: 'id', autoIncrement:true });
+        let staffOS = db.createObjectStore('staffOS', { keyPath: 'staffId', autoIncrement:false });
         
         // creating columns
         staffOS.createIndex('firstName', 'firstName', { unique : false });
         staffOS.createIndex('lastName', 'lastName', { unique : false });
-        staffOS.createIndex('staffId', 'staffId', { unique : true });
         // --encrypt password
         staffOS.createIndex('password', 'password', { unique : false });
         staffOS.createIndex('phone', 'phone', { unique : false });
@@ -116,7 +115,19 @@ onload = function (){
         // creating columns
         studentOS.createIndex('firstName', 'firstName', { unique : false });
         studentOS.createIndex('lastName', 'lastName', { unique : false });
+        studentOS.createIndex('password', 'password', { unique : false })
         studentOS.createIndex('phone', 'phone', { unique : false });
+
+
+
+        /////// Clearance Table
+        let clearanceOS = db.createObjectStore('clearanceRequestOS', { keyPath: 'requestId', autoIncrement:true });
+
+        // creating columns
+        clearanceOS.createIndex('studentId', 'studentId', { unique : false });
+        clearanceOS.createIndex('deptId', 'deptId', { unique : false });
+        clearanceOS.createIndex('status', 'status', { unique : false });
+        clearanceOS.createIndex('description', 'description', { unique : false });
         
         transaction.oncomplete = () => {
             console.log('Succesfully added new record.');

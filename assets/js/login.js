@@ -123,7 +123,7 @@ onload = function (){
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'A1',
+            'staffId' : 'F96',
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
@@ -156,6 +156,7 @@ onload = function (){
                 'lastName' : 'B',
                 // studentId must be unique
                 'studentId' : 'TT/99/01',
+                'password' : 'add',
                 'phone' : 0911445566,
             };
             transaction = db.transaction(['studentOS'], 'readwrite');
@@ -182,58 +183,93 @@ onload = function (){
     loginbtn.addEventListener('click', login);
 
     function login (e){
+        var loginStatus = true
 
         e.preventDefault()
 
         let staffId = document.querySelector('#staffId').value;
         let password = document.querySelector('#password').value;
 
-        let objectStore = db.transaction(["staffOS"]).objectStore("staffOS");
-        let request =  objectStore.get(staffId);
+        let objectStoreStaff = db.transaction(["staffOS"]).objectStore("staffOS");
+        let request =  objectStoreStaff.get(staffId);
         
 
         request.onerror =  function(e){
-            alert("user not Authenticated")
+            // alert("user not Authenticated")
             return;
         };
         request.onsuccess = function(e){
             if(typeof(request.result) == 'undefined'){
-                alert("user not authenticated")
+                // alert("user not authenticated")
                 return;
             }
             else if(password != request.result.password){
-                 alert("user not authenticated")
+                //  alert("user not authenticated")
                  return;    
             }else{
-                // The first letter of the staff ID indicates their department
-                let deptID;
-                switch (staffId[0]) {
-                    case 'L':
-                        deptID = 'lib';
-                        break;
-                    case 'S':
-                        deptID = 'sps';
-                        break;
-                    case 'D':
-                        deptID = 'drm';
-                        break;
-                    case 'F':
-                        deptID = 'dep';
-                        break;
-                    case 'A':
-                        deptID = 'adm';
-                        window.location.replace('./admin.html?' + 'dp=' + deptID);
-                        return;
-                    
-                    default:
-                        break;
-                };
-                window.location.replace('./dash.html?' + 'dp=' + deptID);
-                 
+                loginStatus = true
             }
-            
             console.log("You are Logged IN")
-        }      
+        } 
+        
+        
+        let objectStoreStudent = db.transaction(["studentOS"]).objectStore("studentOS");
+        let request2student =  objectStoreStudent.get(staffId);
+        
+
+        request2student.onerror =  function(e){
+            // alert("user not Authenticated")
+            return;
+        };
+        request2student.onsuccess = function(e){
+            if(typeof(request2student.result) == 'undefined'){
+                // alert("user not authenticated")
+                return;
+            }
+            else if(password != request2student.result.password){
+                //  alert("user not authenticated")
+                 return;    
+            }else{
+                loginStatus = true
+            }
+            console.log("You are Logged IN")
+        } 
+        
+
+        if (loginStatus){
+            // The first letter of the staff ID indicates their department
+            let deptID;
+            switch (staffId[0]) {
+                case 'L':
+                    deptID = 'lib';
+                    break;
+                case 'S':
+                    deptID = 'sps';
+                    break;
+                case 'D':
+                    deptID = 'drm';
+                    break;
+                case 'F':
+                    deptID = 'dep';
+                    break;
+                case 'A':
+                    deptID = 'adm';
+                    window.location.replace('./admin.html?' + 'dp=' + deptID);
+                    return;
+                
+                case 'T':
+                    deptID = 'std';
+                    window.location.replace('./students.html?' + 'dp=' + deptID);
+                    return;
+                    
+                default:
+                    break;
+            };
+            window.location.replace('./dash.html?' + 'dp=' + deptID);
+        } else {
+            alert('User not authenticated!')
+        }
+         
     }
 
 }
