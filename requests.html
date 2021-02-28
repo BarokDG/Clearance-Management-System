@@ -98,6 +98,7 @@
                             <th scope="col">Last</th>
                             <th scope="col">Department</th>
                             <th scope="col">Phone Number</th>
+                            <th scope="col">Status</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -116,52 +117,30 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header mx-3">
-                    <h5 class="modal-title" id="exampleModalLabel">Record a Loan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Clearance Status</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body mx-3">
                     <div class="modal-body mx-3">
-                        <form class="add-record-form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="firstName" placeholder="First Name"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="studentId" placeholder="ID" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="phone" placeholder="Phone No." required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="department" placeholder="Department"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="bookTitle" placeholder="Book Title"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="start" id="bd">Loan date:</label>
-                                <input type="date" id="dateLoaned" name="trip-start" value="2021-02-03" min="2018-01-01"
-                                    max="2021-12-31" required>
-                            </div>
-
-
-                            <!-- <div class="form-group">
-                            <label for="start" id="rd">Return date:</label>
-                            <input type="date" id="start" name="trip-start" value="2021-02-03" min="2018-01-01"
-                                max="2021-12-31" required>
-                        </div> -->
-                        </form>
+                        <h5 class="mb-4" id="modalId"></h5>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input form-check-input-cleared" onchange="toggleDescription()" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="cleared">
+                            <label class="form-check-label" for="inlineRadio1">Cleared</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input form-check-input-rejected" onchange="toggleDescription()" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="rejected">
+                            <label class="form-check-label" for="inlineRadio2">Rejected</label>
+                          </div>
+                          <div class="form-group mt-4" id="rejDesc" style="display: none;">
+                            <label for="exampleFormControlTextarea1">Description</label>
+                            <textarea class="form-control form-control-description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="addRecordButton"> Loan</button>
+                        <button type="submit" class="btn btn-primary" id="updateClearanceStatusButton"> Update</button>
                     </div>
                 </div>
             </div>

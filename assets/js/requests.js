@@ -1,23 +1,27 @@
+var editBtn
+
+
 function displayClearanceRequests(){
-    console.log(tableBody.firstElementChild);
     while (tableBody.firstElementChild){
         tableBody.removeChild(tableBody.firstChild);
     }
 
     let transaction = db.transaction(['clearanceOS'], 'readwrite');
     let objectStore = transaction.objectStore('clearanceOS');
-    let requestingStudents = []
-    
+    let requestingStudents = {}
+    let emptyCheck = true
+
     objectStore.openCursor().onsuccess = e => {
         let cursor = e.target.result;
 
         if(cursor){
             if(cursor.value.deptId == currentDept){
-                requestingStudents.push(cursor.value.studentId)
+                emptyCheck = false
+                requestingStudents[cursor.value.studentId] = cursor.value.status
                 let transactionStudentOS = db.transaction(['studentOS'], 'readwrite');
                 let studentOS = transactionStudentOS.objectStore('studentOS');
                 
-                for (const requestingStudentId of requestingStudents){
+                for (const requestingStudentId in requestingStudents){
                     let request = studentOS.get(requestingStudentId)
                     
                     request.onerror = function(e){
@@ -32,8 +36,8 @@ function displayClearanceRequests(){
                         const lastNameColumn = document.createElement('td');
                         const deptColumn = document.createElement('td');
                         const phoneColumn = document.createElement('td');
+                        const statusColumn = document.createElement('td'); 
                         const editColumn = document.createElement('td');
-                        // const dateLoanedColumn = document.createElement('td');
             
                         // tableRow.appendChild(idColumn);
                         tableRow.appendChild(studentIdColumn);
@@ -41,6 +45,7 @@ function displayClearanceRequests(){
                         tableRow.appendChild(lastNameColumn);
                         tableRow.appendChild(deptColumn);
                         tableRow.appendChild(phoneColumn);
+                        tableRow.appendChild(statusColumn);
                         tableRow.appendChild(editColumn);
                         
                         tableBody.appendChild(tableRow);
@@ -49,14 +54,87 @@ function displayClearanceRequests(){
                         lastNameColumn.textContent = request.result.lastName;
                         // deptColumn.textContent = cursor.value.department;
                         phoneColumn.textContent = request.result.phone;
-                        // editColumn.i
+                        statusColumn.innerHTML = requestingStudents[requestingStudentId] == 'cleared' ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>';
+                        editColumn.innerHTML = `<i class="fas fa-edit" style="cursor:pointer" data-toggle="modal" data-target="#exampleModal"></i>`;
                         
-            
+                        
                     }
                 }
             }
             cursor.continue()
         }
+        else if(!emptyCheck){
+            editBtn = document.querySelector('.fa-edit')
+            editBtn.addEventListener('click', getClearanceModal)
+        }
     }
+
+}
+
+function getClearanceModal(){
+    const updateBtn = document.querySelector('#updateClearanceStatusButton')
+    updateBtn.addEventListener('click', updateClearanceStatus)
+    document.querySelector('#modalId').textContent = editBtn.parentElement.parentElement.firstElementChild.textContent
+}
+
+function updateClearanceStatus(){
+    const clearedRadioBtn = document.querySelector('.form-check-input-cleared')
+    const rejectedRadioBtn = document.querySelector('.form-check-input-rejected')
+    const descriptionTextArea = document.querySelector('.form-control-description')
+    const studentId = editBtn.parentElement.parentElement.firstElementChild.textContent
+
+    let transaction = db.transaction(['clearanceOS'], 'readwrite');
+    let objectStore = transaction.objectStore('clearanceOS');
+    let clearanceRequestId
+    
+    objectStore.openCursor().onsuccess = e => {
+        let cursor = e.target.result;
+
+        if(cursor){
+            if(cursor.value.studentId == studentId && cursor.value.deptId == currentDept){
+                clearanceRequestId = cursor.value.requestId
+
+                // Get the to-do list object that has this title as it's title
+                const objectStoreTitleRequest = objectStore.get(clearanceRequestId);
+                
+                if (clearedRadioBtn.checked){
+                    console.log('cleared');
+                    objectStoreTitleRequest.onsuccess = () => {
+                        const data = objectStoreTitleRequest.result;
+                        data.status = "cleared";
+                        data.description = '';
+                        const updateTitleRequest = objectStore.put(data);
+                
+                        updateTitleRequest.onsuccess = () => {
+                            console.log('Successfully updated clearance request');
+                            displayClearanceRequests();
+                        };
+                    };
+                }
+                else if(rejectedRadioBtn.checked){
+                    console.log('rejected');
+                    objectStoreTitleRequest.onsuccess = () => {
+                        const data = objectStoreTitleRequest.result;
+                        data.status = "rejected";
+                        data.description = descriptionTextArea.value;
+                        const updateTitleRequest = objectStore.put(data);
+                
+                        updateTitleRequest.onsuccess = () => {
+                            console.log('Successfully updated clearance request');
+                            displayClearanceRequests();
+                        };
+                    };
+                }
+            }
+            cursor.continue()
+        }
+    }
+}
+
+function toggleDescription(){
+    if (document.getElementById('inlineRadio2').checked)
+        document.getElementById('rejDesc').style.display = 'block'
+    else if (document.getElementById('inlineRadio1').checked)
+        document.getElementById('rejDesc').style.display = 'none'
 
 }

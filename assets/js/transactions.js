@@ -441,22 +441,22 @@ function displayClearanceStatus(){
             switch (cursor.value.deptId) {
                 case 'lib':
                     // add show description for failed clearances
-                    cursor.value.status ? libStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : libStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    cursor.value.status == 'cleared' ? libStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : libStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                     document.getElementById('lib').disabled = true
                     document.getElementById('lib').className = 'btn btn-secondary mb-2 disabled'
                     break;
                 case 'sps':
-                    cursor.value.status ? spsStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : spsStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    cursor.value.status == 'cleared' ? spsStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : spsStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                     document.getElementById('sps').disabled = true
                     document.getElementById('sps').className = 'btn btn-secondary mb-2 disabled'
                     break;
                 case 'dep':
-                    cursor.value.status ? dptStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : dptStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    cursor.value.status == 'cleared' ? dptStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : dptStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                     document.getElementById('dep').disabled = true
                     document.getElementById('dep').className = 'btn btn-secondary mb-2 disabled'
                     break;
                 case 'drm':
-                    cursor.value.status ? drmStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : drmStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    cursor.value.status == 'cleared' ? drmStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : drmStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                     document.getElementById('drm').disabled = true
                     document.getElementById('drm').className = 'btn btn-secondary mb-2 disabled'
                     break;
