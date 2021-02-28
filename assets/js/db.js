@@ -39,13 +39,23 @@ onload = function (){
     request.onsuccess = () => {
         console.log('ClearanceDB opened.');
         db = request.result;
-        // Insert loan transaction data into UI
+        
+        // Display loan transaction data into UI loan.html
         try {
             displayTransactions();
             personalizeTableHeader();
         } catch (error){
             console.log();
         }
+
+        // Display clearance requests data into UI requests.html
+        try {
+            displayClearanceRequests()
+        } catch (error) {
+            console.log();
+        }
+
+        // Display clearance request status into UI students.html
         try {
             displayClearanceStatus();
         } catch (error){
@@ -130,13 +140,15 @@ onload = function (){
 
 
         /////// Clearance Table
-        let clearanceOS = db.createObjectStore('clearanceRequestOS', { keyPath: 'requestId', autoIncrement:true });
+        let clearanceOS = db.createObjectStore('clearanceOS', { keyPath: 'requestId', autoIncrement:true });
 
         // creating columns
         clearanceOS.createIndex('studentId', 'studentId', { unique : false });
         clearanceOS.createIndex('deptId', 'deptId', { unique : false });
         clearanceOS.createIndex('status', 'status', { unique : false });
         clearanceOS.createIndex('description', 'description', { unique : false });
+
+        
         
         transaction.oncomplete = () => {
             console.log('Succesfully added new record.');

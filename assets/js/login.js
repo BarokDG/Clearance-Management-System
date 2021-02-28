@@ -106,8 +106,20 @@ onload = function (){
         // creating columns
         studentOS.createIndex('firstName', 'firstName', { unique : false });
         studentOS.createIndex('lastName', 'lastName', { unique : false });
+        studentOS.createIndex('password', 'password', { unique : false })
         studentOS.createIndex('phone', 'phone', { unique : false });
-        
+
+
+
+        /////// Clearance Table
+        let clearanceOS = db.createObjectStore('clearanceOS', { keyPath: 'requestId', autoIncrement:true });
+
+        // creating columns
+        clearanceOS.createIndex('studentId', 'studentId', { unique : false });
+        clearanceOS.createIndex('deptId', 'deptId', { unique : false });
+        clearanceOS.createIndex('status', 'status', { unique : false });
+        clearanceOS.createIndex('description', 'description', { unique : false });
+
 
         
         console.log('ClearanceDB upgraded.');
@@ -123,7 +135,7 @@ onload = function (){
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
             // studentId must be unique
-            'staffId' : 'F96',
+            'staffId' : 'L96',
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
@@ -259,7 +271,7 @@ onload = function (){
                 
                 case 'T':
                     deptID = 'std';
-                    window.location.replace('./students.html?' + 'dp=' + deptID);
+                    window.location.replace('./students.html?' + 'dp=' + deptID + '&id=' + staffId);
                     return;
                     
                 default:

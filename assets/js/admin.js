@@ -1,3 +1,11 @@
+onload = () => {
+    for (let i = 0; i < anchors.length; i++) {
+        if (anchors[i].href.endsWith('requests.html')) {
+            anchors[i].remove()
+        }
+    }
+}
+
 function displayClearanceStatus(){
     while (tableBody.firstChild){
         tableBody.removeChild(tableBody.firstChild);

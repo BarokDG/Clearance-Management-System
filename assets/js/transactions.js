@@ -440,6 +440,7 @@ function displayClearanceStatus(){
         if(cursor && cursor.value.studentId == urlSearchParams.get('id')){
             switch (cursor.value.deptId) {
                 case 'lib':
+                    // add show description for failed clearances
                     cursor.value.status ? libStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : libStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                     document.getElementById('lib').disabled = true
                     document.getElementById('lib').className = 'btn btn-secondary mb-2 disabled'
@@ -449,10 +450,10 @@ function displayClearanceStatus(){
                     document.getElementById('sps').disabled = true
                     document.getElementById('sps').className = 'btn btn-secondary mb-2 disabled'
                     break;
-                case 'dpt':
+                case 'dep':
                     cursor.value.status ? dptStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : dptStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
-                    document.getElementById('dpt').disabled = true
-                    document.getElementById('dpt').className = 'btn btn-secondary mb-2 disabled'
+                    document.getElementById('dep').disabled = true
+                    document.getElementById('dep').className = 'btn btn-secondary mb-2 disabled'
                     break;
                 case 'drm':
                     cursor.value.status ? drmStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : drmStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
