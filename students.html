@@ -101,12 +101,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
-                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <button class="btn btn-primary mb-2 disabled" id="lib">Request Clearance</button>
                                         <p class="card-text">Request Date: </p>
                                         <p class="card-text">Response Date: </p>
                                     </div>
                                     <div class="col-md-6 text-center align-self-center">
-                                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                                        <i class="fas fa-exclamation-triangle fa-5x text-danger" id="libStatusIcon"></i>
                                     </div>
                                 </div>
                             </div>
@@ -118,12 +118,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
-                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <button class="btn btn-primary mb-2 disabled" id="sps">Request Clearance</button>
                                         <p class="card-text">Request Date: </p>
                                         <p class="card-text">Response Date: </p>
                                     </div>
                                     <div class="col-md-6 text-center align-self-center">
-                                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                                        <i class="fas fa-exclamation-triangle fa-5x text-danger" id="spsStatusIcon"></i>
                                     </div>
                                 </div>
                             </div>
@@ -138,12 +138,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
-                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <button class="btn btn-primary mb-2 disabled" id="dpt">Request Clearance</button>
                                         <p class="card-text">Request Date: </p>
                                         <p class="card-text">Response Date: </p>
                                     </div>
                                     <div class="col-md-6 text-center align-self-center">
-                                        <i class="fas fa-exclamation-triangle fa-5x text-danger"></i>
+                                        <i class="fas fa-exclamation-triangle fa-5x text-danger" id="dptStatusIcon"></i>
                                     </div>
                                 </div>
                             </div>
@@ -155,12 +155,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
-                                        <button class="btn btn-primary mb-2 disabled">Request Clearance</button>
+                                        <button class="btn btn-primary mb-2 disabled" id="drm">Request Clearance</button>
                                         <p class="card-text">Request Date: </p>
                                         <p class="card-text">Response Date: </p>
                                     </div>
                                     <div class="col-md-6 text-center align-self-center">
-                                        <i class="fas fa-user-clock fa-5x text-secondary"></i>
+                                        <i class="fas fa-exclamation-triangle fa-5x text-danger" id="drmStatusIcon"></i>
                                     </div>
                                 </div>
                             </div>
@@ -190,8 +190,8 @@
         <!-- Add and display -->
         <script src="./assets/js/transactions.js"></script>
 
+        <!-- <script src="./assets/js/personalize.js"></script> -->
         <!-- personalize for each department -->
-        <script src="./assets/js/personalize.js"></script>
 
 
         <!-- ApexCharts js -->
