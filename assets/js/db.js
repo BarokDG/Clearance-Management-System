@@ -40,8 +40,17 @@ onload = function (){
         console.log('ClearanceDB opened.');
         db = request.result;
         // Insert loan transaction data into UI
-        displayTransactions();
-        personalizeTableHeader();
+        try {
+            displayTransactions();
+            personalizeTableHeader();
+        } catch (error){
+            console.log();
+        }
+        try {
+            displayClearanceStatus();
+        } catch (error){
+            console.log();
+        }
     }
 
     request.onupgradeneeded = (e) => {
