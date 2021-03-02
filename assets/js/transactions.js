@@ -439,24 +439,76 @@ function displayClearanceStatus(){
 
         if(cursor && cursor.value.studentId == urlSearchParams.get('id')){
             switch (cursor.value.deptId) {
+
+                //  Library Display
                 case 'lib':
                     // add show description for failed clearances
-                    cursor.value.status == 'cleared' ? libStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : libStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    if (cursor.value.status == 'cleared'){
+                        libStatusIcon.className = 'fas fa-check-circle fa-5x text-success' 
+                    } 
+                    else if (cursor.value.status == 'rejected'){
+                        libStatusIcon.className = 'fas fa-times-circle fa-5x text-danger'
+                        libStatusIcon.parentElement.parentElement.firstElementChild.children[3].hidden = false 
+                        libStatusIcon.parentElement.parentElement.firstElementChild.children[3].textContent += ` "${cursor.value.description}"`
+                        libStatusIcon.parentElement.parentElement.firstElementChild.children[4].hidden = false 
+                    }
+                    else {
+                        libStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    }
                     document.getElementById('lib').disabled = true
                     document.getElementById('lib').className = 'btn btn-secondary mb-2 disabled'
                     break;
+
+                // Sports Display
                 case 'sps':
-                    cursor.value.status == 'cleared' ? spsStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : spsStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    if (cursor.value.status == 'cleared'){
+                        spsStatusIcon.className = 'fas fa-check-circle fa-5x text-success' 
+                    } 
+                    else if (cursor.value.status == 'rejected'){
+                        spsStatusIcon.className = 'fas fa-times-circle fa-5x text-danger'
+                        spsStatusIcon.parentElement.parentElement.firstElementChild.children[3].hidden = false
+                        spsStatusIcon.parentElement.parentElement.firstElementChild.children[3].textContent += ` "${cursor.value.description}"`
+                        spsStatusIcon.parentElement.parentElement.firstElementChild.children[4].hidden = false 
+                    }
+                    else {
+                        spsStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    }
                     document.getElementById('sps').disabled = true
                     document.getElementById('sps').className = 'btn btn-secondary mb-2 disabled'
                     break;
+
+                // Dept Display
                 case 'dep':
-                    cursor.value.status == 'cleared' ? dptStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : dptStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    if (cursor.value.status == 'cleared'){
+                        dptStatusIcon.className = 'fas fa-check-circle fa-5x text-success' 
+                    } 
+                    else if (cursor.value.status == 'rejected'){
+                        dptStatusIcon.className = 'fas fa-times-circle fa-5x text-danger'
+                        dptStatusIcon.parentElement.parentElement.firstElementChild.children[3].hidden = false
+                        dptStatusIcon.parentElement.parentElement.firstElementChild.children[3].textContent += ` "${cursor.value.description}"`
+                        dptStatusIcon.parentElement.parentElement.firstElementChild.children[4].hidden = false 
+                    }
+                    else {
+                        dptStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    }
                     document.getElementById('dep').disabled = true
                     document.getElementById('dep').className = 'btn btn-secondary mb-2 disabled'
                     break;
+
+                // Dorm Display
                 case 'drm':
-                    cursor.value.status == 'cleared' ? drmStatusIcon.className = 'fas fa-user-clock fa-5x text-success' : drmStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    if (cursor.value.status == 'cleared'){
+                        drmStatusIcon.className = 'fas fa-check-circle fa-5x text-success' 
+                    } 
+                    else if (cursor.value.status == 'rejected'){
+                        drmStatusIcon.className = 'fas fa-times-circle fa-5x text-danger'
+                        drmStatusIcon.parentElement.parentElement.firstElementChild.children[3].hidden = false
+                        drmStatusIcon.parentElement.parentElement.firstElementChild.children[3].textContent += ` "${cursor.value.description}"`
+                        drmStatusIcon.parentElement.parentElement.firstElementChild.children[4].hidden = false 
+                    }
+                    else {
+                        drmStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                    }
                     document.getElementById('drm').disabled = true
                     document.getElementById('drm').className = 'btn btn-secondary mb-2 disabled'
                     break;
