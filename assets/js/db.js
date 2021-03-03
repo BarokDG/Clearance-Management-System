@@ -15,7 +15,6 @@ const currentDept = urlSearchParams.get('dp');
 
 let db;
 
-
 onload = function (){
     // Attaching ID to outgoing urls
     for (let i = 0; i < anchors.length; i++) {
@@ -59,6 +58,14 @@ onload = function (){
         try {
             displayClearanceStatus();
         } catch (error){
+            console.log();
+        }
+
+
+        // Display clearance requests and status for clearance dept admin
+        try {
+            displayClearanceStatusForAdmin()
+        } catch (error) {
             console.log();
         }
     }
