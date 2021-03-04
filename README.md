@@ -2,11 +2,11 @@
 We have emulated the following users:
   For Staff:
       *passwords for all staff accounts is 'cldb'
-      Admin: Username - A1,
-      Library: L96,
-      Dorm: D96,
-      Sports: S96,
-      Department: F96
+      *Admin: Username - A1,
+      *Library: L96,
+      *Dorm: D96,
+      *Sports: S96,
+      *Department: F96
       
   For Student:
       *passwords for all student accounts is 'add'
