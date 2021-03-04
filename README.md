@@ -1,5 +1,4 @@
 # Clearance-Management-System
-Our system assumes there is an existing database that contains student's and emmployee's information.
 We have emulated the following users:
   For Staff:
       *passwords for all staff accounts is 'cldb'
