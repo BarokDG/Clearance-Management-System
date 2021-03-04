@@ -129,8 +129,8 @@ onload = function (){
     
     // Add staff members
     function addStaffMembers() {
-	// Admin can add new staff here
-        let newRecord = {
+	// A0dmin can add new staff here
+        let librarystaff = {
         
             'firstName' : 'Abebe',
             'lastName' : 'Kebede',
@@ -139,11 +139,69 @@ onload = function (){
             'phone' : 0911445566,
             'password' : 'cldb'    
         };
+        let sportsstaff = {
+            'firstName' : 'Kebede',
+            'lastName' : 'Belechu',
+            // studentId must be unique
+            'staffId' : 'S96',
+            'phone' : 0911445066,
+            'password' : 'cldb'    
+        };
+        let dormstaff = {
+            'firstName' : 'Belechu',
+            'lastName' : 'Alemayehu',
+            // studentId must be unique
+            'staffId' : 'D96',
+            'phone' : 0911445066,
+            'password' : 'cldb'    
+        };
+        let departmentstaff = {
+            'firstName' : 'Alemitu',
+            'lastName' : 'Belechu',
+            // studentId must be unique
+            'staffId' : 'F96',
+            'phone' : 0911445066,
+            'password' : 'cldb'    
+        };
+        let clearanceadmin = {
+            'firstName' : 'Kassech',
+            'lastName' : 'Belechu',
+            // studentId must be unique
+            'staffId' : 'A1',
+            'phone' : 0911445066,
+            'password' : 'cldb'    
+        };
+
         transaction = db.transaction(['staffOS'], 'readwrite');
         objectStore = transaction.objectStore('staffOS');
         // add record to correct OS
-        let requestAddStaff = objectStore.add(newRecord);
+        let requestAddStaff = objectStore.add(librarystaff);
+        let requestAddStaff1 = objectStore.add(sportsstaff);
+        let requestAddStaff2 = objectStore.add(dormstaff);
+        let requestAddStaff3 = objectStore.add(departmentstaff);
+        let requestAddStaff4 = objectStore.add(clearanceadmin);
+        
         requestAddStaff.onsuccess = () => {
+            // clear form / close modal
+            console.log('Add request successful.');
+        }
+        
+        requestAddStaff1.onsuccess = () => {
+            // clear form / close modal
+            console.log('Add request successful.');
+        }
+        
+        requestAddStaff2.onsuccess = () => {
+            // clear form / close modal
+            console.log('Add request successful.');
+        }
+        
+        requestAddStaff3.onsuccess = () => {
+            // clear form / close modal
+            console.log('Add request successful.');
+        }
+        
+        requestAddStaff4.onsuccess = () => {
             // clear form / close modal
             console.log('Add request successful.');
         }
@@ -164,18 +222,53 @@ onload = function (){
         // Admin can add new staff here
             let newRecord = {
             
-                'firstName' : 'Sports GUY',
-                'lastName' : '101',
+                'firstName' : 'Yohan',
+                'lastName' : 'Belay',
                 // studentId must be unique
-                'studentId' : 'TT/00/11',
+                'studentId' : 'TT/99/11',
+                'password' : 'add',
+                'phone' : 0911445566,
+            };
+            let newRecord1 = {
+            
+                'firstName' : 'Meseret',
+                'lastName' : 'Damte',
+                // studentId must be unique
+                'studentId' : 'TT/99/12',
+                'password' : 'add',
+                'phone' : 0911445566,
+            };
+            let newRecord2 = {
+            
+                'firstName' : 'Melat',
+                'lastName' : 'Mola',
+                // studentId must be unique
+                'studentId' : 'TT/99/13',
                 'password' : 'add',
                 'phone' : 0911445566,
             };
             transaction = db.transaction(['studentOS'], 'readwrite');
             objectStore = transaction.objectStore('studentOS');
             // add record to correct OS
+
             let requestAddStaff = objectStore.add(newRecord);
+            let requestAddStaff1 = objectStore.add(newRecord1);
+            let requestAddStaff2 = objectStore.add(newRecord2);
+
+            
             requestAddStaff.onsuccess = () => {
+                // clear form / close modal
+                console.log('Add request successful.');
+            }
+            
+
+            requestAddStaff1.onsuccess = () => {
+                // clear form / close modal
+                console.log('Add request successful.');
+            }
+            
+
+            requestAddStaff2.onsuccess = () => {
                 // clear form / close modal
                 console.log('Add request successful.');
             }
