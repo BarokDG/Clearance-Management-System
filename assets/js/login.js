@@ -164,10 +164,10 @@ onload = function (){
         // Admin can add new staff here
             let newRecord = {
             
-                'firstName' : 'Keke',
-                'lastName' : 'B',
+                'firstName' : 'Sports GUY',
+                'lastName' : '101',
                 // studentId must be unique
-                'studentId' : 'TT/00/01',
+                'studentId' : 'TT/00/11',
                 'password' : 'add',
                 'phone' : 0911445566,
             };

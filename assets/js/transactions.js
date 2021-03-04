@@ -3,6 +3,7 @@ const libStatusIcon = document.querySelector('#libStatusIcon')
 const spsStatusIcon = document.querySelector('#spsStatusIcon')
 const dptStatusIcon = document.querySelector('#dptStatusIcon')
 const drmStatusIcon = document.querySelector('#drmStatusIcon')
+const clsStatusIcon = document.querySelector('#clsStatusIcon')
 
 try {
     newLoanButton. addEventListener('click', getForm);
@@ -406,12 +407,19 @@ objectStore.openCursor().onsuccess= function(e){
 
 // ADD CLEARANCE REQUEST
 for (const btn of clearanceRequestBtn) {
-    btn.addEventListener('click', addClearanceRequest)
+    if(btn.id != 'cls'){
+        btn.addEventListener('click', addClearanceRequest)
+    }
+    else{
+        btn.addEventListener('click', addClearanceRequestCleareanceDept)
+    }
 }
 function addClearanceRequest(e){
     let newRecord = {
         studentId : urlSearchParams.get('id'),
-        deptId : e.target.id
+        deptId : e.target.id,
+        status : "",
+        description : ""
     }
 
     let transaction = db.transaction(['clearanceOS'], 'readwrite');
@@ -433,6 +441,39 @@ function addClearanceRequest(e){
     transaction.onerror = () => {
         console.log('Error! Cannot add new record!' + request.error);
     }
+
+}
+
+function addClearanceRequestCleareanceDept(e){
+    let newRecord = {
+        studentId : urlSearchParams.get('id'),
+        deptId : e.target.id
+    }
+
+
+    if (e.target.id == 'cls'){
+        let allCleared = []
+        
+        let transaction = db.transaction(['clearanceOS'], 'readwrite');
+        let objectStore = transaction.objectStore('clearanceOS');
+        
+        objectStore.openCursor().onsuccess = e => {
+            let cursor = e.target.result;
+            if(cursor){
+                if (cursor.value.studentId == urlSearchParams.get('id')){
+                    allCleared = true
+                }
+                cursor.continue()
+            }
+            else if(allCleared.length != 4 || allCleared.includes('rejected')){
+                alert('You will have to get a successful clearance notice from all the other departments first!')
+            }
+            else{
+                console.log('successfully added to clear');
+            }
+        }
+    }
+    
 
 }
 
@@ -514,6 +555,24 @@ function displayClearanceStatus(){
                         }
                         else {
                             drmStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
+                        }
+                        document.getElementById('drm').disabled = true
+                        document.getElementById('drm').className = 'btn btn-secondary mb-2 disabled'
+                        break;
+                
+                    // Dorm Display
+                    case 'cls':
+                        if (cursor.value.status == 'cleared'){
+                            clsStatusIcon.className = 'fas fa-check-circle fa-5x text-success' 
+                        } 
+                        else if (cursor.value.status == 'rejected'){
+                            clsStatusIcon.className = 'fas fa-times-circle fa-5x text-danger'
+                            clsStatusIcon.parentElement.parentElement.firstElementChild.children[3].hidden = false
+                            clsStatusIcon.parentElement.parentElement.firstElementChild.children[3].textContent += ` "${cursor.value.description}"`
+                            clsStatusIcon.parentElement.parentElement.firstElementChild.children[4].hidden = false 
+                        }
+                        else {
+                            clsStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                         }
                         document.getElementById('drm').disabled = true
                         document.getElementById('drm').className = 'btn btn-secondary mb-2 disabled'
