@@ -370,7 +370,7 @@ onload = function (){
                 default:
                     break;
             };
-            window.location.replace('./dash.html?' + 'dp=' + deptID);
+            window.location.replace('./loan.html?' + 'dp=' + deptID);
         } else {
             alert('User not authenticated!')
         }
