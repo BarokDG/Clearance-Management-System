@@ -1,135 +1,127 @@
-function displayClearanceStatusForAdmin(){
-    while (tableBody.firstChild){
-        tableBody.removeChild(tableBody.firstChild);
-    }
+const tableBodyA = document.querySelector('.table-body-requests')
 
-    // studentOS
-    let studentTransaction = db.transaction(['studentOS'], 'readwrite');
-    let studentObjectStore = studentTransaction.objectStore('studentOS');
+if(currentDept == 'adm'){
 
-    let studentListRequest = studentObjectStore.getAll();
-    var studentToRequestMap = {}
-
-    studentListRequest.onsuccess = e => {
-   
-        studentListRequest.result.forEach(cursor => { 
-            studentToRequestMap[cursor.studentId] = new Map()
-        });
-        
-        let clearanceTransaction = db.transaction(['clearanceOS'], 'readwrite');
-        let clearanceObjectStore = clearanceTransaction.objectStore('clearanceOS');
-
-        clearanceObjectStore.openCursor().onsuccess = e => {
-            let cursor = e.target.result;
-
-            if(cursor){
-                // studentToRequestMap[cursor.value.studentId].push()
-                studentToRequestMap[cursor.value.studentId][cursor.value.deptId] = cursor.value.status
-                // studentToRequestMap[cursor.value.studentId][studentToRequestMap[cursor.value.studentId].length - 1].push(cursor.value.status)
-                cursor.continue()
-            }
-        }
-        printStudentClearanceStatus(studentToRequestMap)
-        console.log(studentToRequestMap);
-        // const tableRow = document.createElement('tr');
-        // const studentIdColumn = document.createElement('td');
-        // const firstNameColumn = document.createElement('td');
-        // const lastNameColumn = document.createElement('td');
-        // const libraryColumn = document.createElement('td');
-        // const sportsColumn = document.createElement('td');
-        // const dormColumn = document.createElement('td');
-        // const deptColumn = document.createElement('td');
-        // const allColumn = document.createElement('td');
-        // tableRow.className = "collection-item";
-        
-        // tableRow.appendChild(studentIdColumn);
-        // tableRow.appendChild(firstNameColumn);
-        // tableRow.appendChild(lastNameColumn);
-        // tableRow.appendChild(libraryColumn);
-        // tableRow.appendChild(sportsColumn);
-        // tableRow.appendChild(dormColumn);
-        // tableRow.appendChild(deptColumn);
-        // tableRow.appendChild(allColumn);
-        // tableBody.appendChild(tableRow)
-
-        // studentIdColumn.textContent = cursor.studentId;
-        // firstNameColumn.textContent = cursor.firstName;
-        // lastNameColumn.textContent = cursor.lastName;
-
-
-        // // if (    libraryClearanceStatus == 'Cleared' & sportsClearanceStatus == 'Cleared' & dormClearanceStatus == 'Cleared' & deptClearanceStatus == 'Cleared'   )
-        // //     allColumn.textContent = 'Cleared'
-        // // else
-        // //     allColumn.textContent = 'Not yet'
-        
-
-    }
     
-}
-search.addEventListener('keyup', searchAdmin);
-function searchAdmin(e){
-    let searchItem  = search.value
-    let collection = document.querySelectorAll(".collection-item");
-
-    collection.forEach((item) =>{
-        if(item.textContent.indexOf(searchItem.toUpperCase())){
-            item.style.display = "none";
-           
-            
-        }
-        else{
-            item.style.display = "flex-inline"
-            
-        }
-    });
-
-    console.log("task filter ... ")
-}
-
-function printStudentClearanceStatus(record){
+    function displayClearanceStatusForAdmin(){
+        const navSmall = document.querySelector('.sidebar-small')
+        const navB = document.querySelector('.sidebar')
+        navSmall.children[2].style.display = 'none'
+        navB.children[2].style.display = 'none'
     
-    for(const student in record){
-        for(const f in record[student]){
-            console.log('11');
+        while (tableBodyA.firstChild){
+            tableBodyA.removeChild(tableBodyA.firstChild);
         }
-        const tableRow = document.createElement('tr');
-        const studentIdColumn = document.createElement('td');
-        const firstNameColumn = document.createElement('td');
-        const lastNameColumn = document.createElement('td');
-        const libraryColumn = document.createElement('td');
-        const sportsColumn = document.createElement('td');
-        const dormColumn = document.createElement('td');
-        const deptColumn = document.createElement('td');
-        const allColumn = document.createElement('td');
-        tableRow.className = "collection-item";
-        
-        tableRow.appendChild(studentIdColumn);
-        tableRow.appendChild(firstNameColumn);
-        tableRow.appendChild(lastNameColumn);
-        tableRow.appendChild(libraryColumn);
-        tableRow.appendChild(sportsColumn);
-        tableRow.appendChild(dormColumn);
-        tableRow.appendChild(deptColumn);
-        tableRow.appendChild(allColumn);
-        tableBody.appendChild(tableRow)
-
-        studentIdColumn.textContent = student
-        setTimeout(() => {
-            libraryColumn.textContent = record[student]['lib']
-            sportsColumn.textContent = record[student]['sps']
-            deptColumn.textContent = record[student]['dep']
-            dormColumn.textContent = record[student]['drm']
-        }, 100)
-        
+    
+        // studentOS
         let studentTransaction = db.transaction(['studentOS'], 'readwrite');
         let studentObjectStore = studentTransaction.objectStore('studentOS');
-        
-        let studentListRequest = studentObjectStore.get(student);
-        
-        studentListRequest.onsuccess = e => {
-            firstNameColumn.textContent = e.target.result.firstName;
-            lastNameColumn.textContent = e.target.result.lastName;
-        }
     
+        let studentListRequest = studentObjectStore.getAll();
+        var studentToRequestMap = {}
+    
+        studentListRequest.onsuccess = e => {
+       
+            studentListRequest.result.forEach(cursor => { 
+                studentToRequestMap[cursor.studentId] = new Map()
+            });
+            
+            let clearanceTransaction = db.transaction(['clearanceOS'], 'readwrite');
+            let clearanceObjectStore = clearanceTransaction.objectStore('clearanceOS');
+    
+            clearanceObjectStore.openCursor().onsuccess = e => {
+                let cursor = e.target.result;
+    
+                if(cursor){
+                    // studentToRequestMap[cursor.value.studentId].push()
+                    studentToRequestMap[cursor.value.studentId][cursor.value.deptId] = cursor.value.status
+                    // studentToRequestMap[cursor.value.studentId][studentToRequestMap[cursor.value.studentId].length - 1].push(cursor.value.status)
+                    cursor.continue()
+                }
+            }
+            console.log(studentToRequestMap);  
+            printStudentClearanceStatus(studentToRequestMap)
+    
+        }
+        
+    }
+
+    
+    search.addEventListener('keyup', searchAdmin);
+    function searchAdmin(e){
+        let searchItem  = search.value
+        let collection = document.querySelectorAll(".collection-item");
+    
+        collection.forEach((item) =>{
+            if(item.textContent.indexOf(searchItem.toUpperCase())){
+                item.style.display = "none";
+               
+                
+            }
+            else{
+                item.style.display = "flex-inline"
+                
+            }
+        });
+    
+        console.log("task filter ... ")
+    }
+    
+    function printStudentClearanceStatus(record){
+        
+        for(const student in record){
+            for(const f in record[student]){
+                console.log('11');
+            }
+            const tableRow = document.createElement('tr');
+            const studentIdColumn = document.createElement('td');
+            const firstNameColumn = document.createElement('td');
+            const lastNameColumn = document.createElement('td');
+            const libraryColumn = document.createElement('td');
+            const sportsColumn = document.createElement('td');
+            const dormColumn = document.createElement('td');
+            const deptColumn = document.createElement('td');
+            const allColumn = document.createElement('td');
+            const editColumn = document.createElement('td');
+
+            tableRow.className = "collection-item";
+            
+            tableRow.appendChild(studentIdColumn);
+            tableRow.appendChild(firstNameColumn);
+            tableRow.appendChild(lastNameColumn);
+            tableRow.appendChild(libraryColumn);
+            tableRow.appendChild(sportsColumn);
+            tableRow.appendChild(dormColumn);
+            tableRow.appendChild(deptColumn);
+            tableRow.appendChild(allColumn);
+            tableRow.appendChild(editColumn);
+            tableBodyA.appendChild(tableRow)
+            
+            editColumn.innerHTML = `<i class="fas fa-edit" style="cursor:pointer" data-toggle="modal" data-target="#exampleModal"></i>`;
+            
+            // ATTACH event listner for latest update button
+            editBtnNodeList = document.querySelectorAll('.fa-edit')
+            editBtn = editBtnNodeList[editBtnNodeList.length - 1]
+            editBtn.addEventListener('click', getClearanceModal)
+    
+            studentIdColumn.textContent = student
+            setTimeout(() => {
+                libraryColumn.textContent = record[student]['lib']
+                sportsColumn.textContent = record[student]['sps']
+                deptColumn.textContent = record[student]['dep']
+                dormColumn.textContent = record[student]['drm']
+            }, 100)
+            
+            let studentTransaction = db.transaction(['studentOS'], 'readwrite');
+            let studentObjectStore = studentTransaction.objectStore('studentOS');
+            
+            let studentListRequest = studentObjectStore.get(student);
+            
+            studentListRequest.onsuccess = e => {
+                firstNameColumn.textContent = e.target.result.firstName;
+                lastNameColumn.textContent = e.target.result.lastName;
+            }
+        
+        }
     }
 }

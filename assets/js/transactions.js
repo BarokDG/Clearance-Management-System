@@ -414,6 +414,7 @@ for (const btn of clearanceRequestBtn) {
         btn.addEventListener('click', addClearanceRequestCleareanceDept)
     }
 }
+
 function addClearanceRequest(e){
     let newRecord = {
         studentId : urlSearchParams.get('id'),
@@ -461,7 +462,7 @@ function addClearanceRequestCleareanceDept(e){
             let cursor = e.target.result;
             if(cursor){
                 if (cursor.value.studentId == urlSearchParams.get('id')){
-                    allCleared = true
+                    allCleared.push(cursor.value.status)
                 }
                 cursor.continue()
             }
@@ -469,7 +470,28 @@ function addClearanceRequestCleareanceDept(e){
                 alert('You will have to get a successful clearance notice from all the other departments first!')
             }
             else{
-                console.log('successfully added to clear');
+                console.log(allCleared);
+
+                let transaction = db.transaction(['clearanceOS'], 'readwrite');
+                let objectStore = transaction.objectStore('clearanceOS');
+                
+                let request = objectStore.add(newRecord)
+
+                request.onsuccess = () => {
+                    // clear form / close modal
+                    console.log('Add request successful.');
+                }
+                
+                transaction.oncomplete = () => {
+                    console.log('Succesfully added new record.');
+                    // display data
+                    displayClearanceStatus();
+                }
+
+                transaction.onerror = () => {
+                    console.log('Error! Cannot add new record!' + request.error);
+                }
+
             }
         }
     }
@@ -477,6 +499,8 @@ function addClearanceRequestCleareanceDept(e){
 
 }
 
+
+// Display clearance status to user
 function displayClearanceStatus(){
     let transaction = db.transaction(['clearanceOS'], 'readwrite');
     let objectStore = transaction.objectStore('clearanceOS');
@@ -574,8 +598,8 @@ function displayClearanceStatus(){
                         else {
                             clsStatusIcon.className = 'fas fa-user-clock fa-5x text-secondary' 
                         }
-                        document.getElementById('drm').disabled = true
-                        document.getElementById('drm').className = 'btn btn-secondary mb-2 disabled'
+                        document.getElementById('cls').disabled = true
+                        document.getElementById('cls').className = 'btn btn-secondary mb-2 disabled'
                         break;
                 
                     default:

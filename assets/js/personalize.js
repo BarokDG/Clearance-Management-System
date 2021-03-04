@@ -25,17 +25,21 @@ function personalizeTableHeader(){
             break;
 
         case 'adm':
+            const tableHeaderA = document.querySelector('.thead-requests')
+            // let loanedColumn = tableHeader.firstChild
             const deptColumn = document.createElement('th')
             const allColumn = document.createElement('th')
             
-            tableHeader.firstElementChild.appendChild(deptColumn)
-            tableHeader.firstElementChild.appendChild(allColumn)
+            document.querySelector('.search-bar').children[1].style.display = 'none'
+            
+            tableHeaderA.firstElementChild.appendChild(deptColumn)
+            tableHeaderA.firstElementChild.appendChild(allColumn)
  
-            tableHeader.firstElementChild.children[3].textContent = 'Library'
-            tableHeader.firstElementChild.children[4].textContent = 'Sports'
-            tableHeader.firstElementChild.children[5].textContent = 'Dorm'
-            tableHeader.firstElementChild.children[6].textContent = 'Department'
-            tableHeader.firstElementChild.children[7].textContent = 'All Clear'
+            tableHeaderA.firstElementChild.children[3].textContent = 'Library'
+            tableHeaderA.firstElementChild.children[4].textContent = 'Sports'
+            tableHeaderA.firstElementChild.children[5].textContent = 'Dorm'
+            tableHeaderA.firstElementChild.children[6].textContent = 'Department'
+            tableHeaderA.firstElementChild.children[7].textContent = 'All Clear'
 
         
         default:

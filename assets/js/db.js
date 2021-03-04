@@ -1,6 +1,6 @@
 // Get UI elements
 const tableHeader = document.querySelector('.thead');
-const tableBody = document.querySelector('.table-body');
+const tableBody = document.querySelector('.table-body-loan');
 const newLoanButton = document.querySelector('#gradient-button');
 const search= document.querySelector('#search')
 const anchors = document.querySelectorAll('a');

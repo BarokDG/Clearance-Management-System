@@ -2,6 +2,8 @@ var editBtn
 
 
 function displayClearanceRequests(){
+    const tableBody = document.querySelector('.table-body-requests')
+    
     while (tableBody.firstElementChild){
         tableBody.removeChild(tableBody.firstChild);
     }
@@ -28,7 +30,6 @@ function displayClearanceRequests(){
             let transactionStudentOS = db.transaction(['studentOS'], 'readwrite');
             let studentOS = transactionStudentOS.objectStore('studentOS');
             
-            console.log(requestingStudents);
             for (const requestingStudentId in requestingStudents){
                 let request = studentOS.get(requestingStudentId)
                 
@@ -77,14 +78,12 @@ function displayClearanceRequests(){
 }
 
 function getClearanceModal(){
-    console.log('1');
     const updateBtn = document.querySelector('#updateClearanceStatusButton')
     updateBtn.addEventListener('click', updateClearanceStatus)
     document.querySelector('#modalId').textContent = editBtn.parentElement.parentElement.firstElementChild.textContent
 }
 
 function updateClearanceStatus(){
-    console.log('uuuu');
     const clearedRadioBtn = document.querySelector('.form-check-input-cleared')
     const rejectedRadioBtn = document.querySelector('.form-check-input-rejected')
     const descriptionTextArea = document.querySelector('.form-control-description')
