@@ -30,7 +30,7 @@ function personalizeTableHeader(){
             const deptColumn = document.createElement('th')
             const allColumn = document.createElement('th')
             
-            document.querySelector('.search-bar').children[1].style.display = 'none'
+            // document.querySelector('.search-bar').children[1].style.display = 'none'
             
             tableHeaderA.firstElementChild.appendChild(deptColumn)
             tableHeaderA.firstElementChild.appendChild(allColumn)

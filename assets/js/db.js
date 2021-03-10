@@ -41,8 +41,8 @@ onload = function (){
         
         // Display loan transaction data into UI loan.html
         try {
-            displayTransactions();
             personalizeTableHeader();
+            displayTransactions();
         } catch (error){
             console.log();
         }

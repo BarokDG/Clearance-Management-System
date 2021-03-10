@@ -57,7 +57,6 @@ function displayClearanceRequests(){
                     tableRow.appendChild(statusColumn);
                     tableRow.appendChild(editColumn);
                     tableBody.appendChild(tableRow);
-                    
                     studentIdColumn.textContent = request.result.studentId;
                     firstNameColumn.textContent = request.result.firstName;
                     lastNameColumn.textContent = request.result.lastName;
@@ -77,18 +76,19 @@ function displayClearanceRequests(){
 
 }
 
-function getClearanceModal(){
+function getClearanceModal(e){
+    var editBtn = e.target
     const updateBtn = document.querySelector('#updateClearanceStatusButton')
     updateBtn.addEventListener('click', updateClearanceStatus)
     document.querySelector('#modalId').textContent = editBtn.parentElement.parentElement.firstElementChild.textContent
 }
 
-function updateClearanceStatus(){
+function updateClearanceStatus(e){
+    console.log(editBtn.parentElement.parentElement.firstElementChild);
     const clearedRadioBtn = document.querySelector('.form-check-input-cleared')
     const rejectedRadioBtn = document.querySelector('.form-check-input-rejected')
     const descriptionTextArea = document.querySelector('.form-control-description')
-    const studentId = editBtn.parentElement.parentElement.firstElementChild.textContent
-
+    const studentId = document.querySelector('#modalId').textContent
     let transaction = db.transaction(['clearanceOS'], 'readwrite');
     let objectStore = transaction.objectStore('clearanceOS');
     let clearanceRequestId
