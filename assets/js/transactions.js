@@ -264,9 +264,9 @@ switch (currentDept) {
 }
     if(confirm("Are you sure about the deletion?")){
     let noteId = e.target.parentNode.parentNode.getAttribute('data-note-id');
-    console.log(e.target.parentNode.parentNode)
+    // console.log(e.target.parentNode.parentNode)
     console.log(noteId);
-        objectStore.delete(noteId);
+    objectStore.delete(noteId);
 
     //   report deletion
     transaction.oncomplete = function(){
@@ -422,7 +422,7 @@ function addClearanceRequest(e){
         status : "",
         description : ""
     }
-
+    console.log(newRecord);
     let transaction = db.transaction(['clearanceOS'], 'readwrite');
     let objectStore = transaction.objectStore('clearanceOS');
     
@@ -445,6 +445,7 @@ function addClearanceRequest(e){
 
 }
 
+// ADD CLEARANCE REQUEST TO CLEARANCE DEPARTMENT
 function addClearanceRequestCleareanceDept(e){
     let newRecord = {
         studentId : urlSearchParams.get('id'),
@@ -466,7 +467,7 @@ function addClearanceRequestCleareanceDept(e){
                 }
                 cursor.continue()
             }
-            else if(allCleared.length != 4 || allCleared.includes('rejected')){
+            else if(allCleared.length != 4 || allCleared.includes('rejected') || allCleared.includes('')){
                 alert('You will have to get a successful clearance notice from all the other departments first!')
             }
             else{

@@ -33,13 +33,10 @@ if(currentDept == 'adm'){
                 let cursor = e.target.result;
     
                 if(cursor){
-                    // studentToRequestMap[cursor.value.studentId].push()
                     studentToRequestMap[cursor.value.studentId][cursor.value.deptId] = cursor.value.status
-                    // studentToRequestMap[cursor.value.studentId][studentToRequestMap[cursor.value.studentId].length - 1].push(cursor.value.status)
                     cursor.continue()
                 }
             }
-            console.log(studentToRequestMap);  
             printStudentClearanceStatus(studentToRequestMap)
     
         }
@@ -51,16 +48,14 @@ if(currentDept == 'adm'){
     function searchAdmin(e){
         let searchItem  = search.value
         let collection = document.querySelectorAll(".collection-item");
-    
+        
         collection.forEach((item) =>{
-            if(item.textContent.indexOf(searchItem.toUpperCase())){
-                item.style.display = "none";
-               
-                
+            if(item.children[0].textContent.includes(searchItem.toUpperCase())){
+                console.log(item);
+                item.hidden = false
             }
             else{
-                item.style.display = "flex-inline"
-                
+                item.hidden = true
             }
         });
     
