@@ -107,10 +107,11 @@ if(currentDept == 'adm'){
     
             studentIdColumn.textContent = student
             setTimeout(() => {
-                libraryColumn.textContent = record[student]['lib']
-                sportsColumn.textContent = record[student]['sps']
-                deptColumn.textContent = record[student]['dep']
-                dormColumn.textContent = record[student]['drm']
+                libraryColumn.innerHTML = record[student]['lib'] == 'cleared' ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>'
+                sportsColumn.innerHTML = record[student]['sps'] == 'cleared' ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>'
+                deptColumn.innerHTML = record[student]['dep'] == 'cleared' ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>'
+                dormColumn.innerHTML = record[student]['drm'] == 'cleared' ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>'
+                allColumn.innerHTML = record[student]['lib'] && record[student]['sps'] && record[student]['dep'] && record[student]['drm'] == 'cleared' ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>'  
             }, 100)
             
             let studentTransaction = db.transaction(['studentOS'], 'readwrite');
