@@ -6,8 +6,15 @@ if(currentDept == 'adm'){
     function displayClearanceStatusForAdmin(){
         const navSmall = document.querySelector('.sidebar-small')
         const navB = document.querySelector('.sidebar')
+        
+        // disable loan link for sidebar and sidebar small
         navSmall.children[2].style.display = 'none'
         navB.children[2].style.display = 'none'
+        
+        // change dash to admin.html
+        navSmall.children[1].href = './admin.html?dp=adm'
+        navB.children[1].href = './admin.html?dp=adm'
+
     
         while (tableBodyA.firstChild){
             tableBodyA.removeChild(tableBodyA.firstChild);
@@ -51,7 +58,6 @@ if(currentDept == 'adm'){
         
         collection.forEach((item) =>{
             if(item.children[0].textContent.includes(searchItem.toUpperCase())){
-                console.log(item);
                 item.hidden = false
             }
             else{
